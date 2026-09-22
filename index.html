@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cuaderno de Estudio - Hematología para Enfermería</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-board: #0f172a;
+            --bg-paper: #1e293b;
+            --bg-card: #182232;
+            --border-paper: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+            --text-muted: #94a3b8;
+            
+            /* Colores Flúor Subrayadores */
+            --fluor-yellow: #ffee55;
+            --fluor-pink: #ff66c4;
+            --fluor-green: #39ff14;
+            --fluor-cyan: #00f0ff;
+            --fluor-purple: #c77dff;
+            
+            /* Post-it / Sticky notes */
+            --postit-yellow: rgba(255, 238, 85, 0.12);
+            --postit-pink: rgba(255, 102, 196, 0.12);
+            --postit-green: rgba(57, 255, 20, 0.12);
+            --postit-cyan: rgba(0, 240, 255, 0.12);
+            
+            --font-hand: 'Caveat', cursive;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-board);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Subrayados Flúor */
+        .hl-y { background: linear-gradient(120deg, rgba(255, 238, 85, 0.35) 0%, rgba(255, 238, 85, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
+        .hl-p { background: linear-gradient(120deg, rgba(255, 102, 196, 0.35) 0%, rgba(255, 102, 196, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
+        .hl-g { background: linear-gradient(120deg, rgba(57, 255, 20, 0.35) 0%, rgba(57, 255, 20, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
+        .hl-c { background: linear-gradient(120deg, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
+
+        /* Interactivo: Definición de Unidades con Tooltip Flúor */
+        .unit-def {
+            border-bottom: 2px dotted var(--fluor-yellow);
+            color: var(--fluor-yellow);
+            cursor: pointer;
+            position: relative;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .unit-def:hover::after, .unit-def:focus::after {
+            content: attr(data-def);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            border: 1.5px solid var(--fluor-yellow);
+            color: #ffffff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.775rem;
+            font-weight: 500;
+            white-space: normal;
+            min-width: 220px;
+            max-width: 280px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 150;
+            line-height: 1.4;
+            font-family: var(--font-sans);
+        }
+
+        /* Header Principal */
+        .app-header {
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .notebook-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notebook-tag {
+            font-family: var(--font-hand);
+            font-size: 1.35rem;
+            color: var(--fluor-yellow);
+            transform: rotate(-2deg);
+            display: inline-block;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .glossary-btn {
+            background: var(--postit-yellow);
+            border: 1px dashed var(--fluor-yellow);
+            color: var(--fluor-yellow);
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.825rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .glossary-btn:hover {
+            background: rgba(255, 238, 85, 0.25);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 340px;
+            min-width: 220px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 99px;
+            padding: 0.5rem 1rem 0.5rem 2.4rem;
+            color: #fff;
+            font-size: 0.875rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--fluor-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 0.85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            fill: var(--text-muted);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Modal Glosario de Unidades */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-paper);
+            border: 2px solid var(--fluor-yellow);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-paper);
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+            color: var(--fluor-yellow);
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Barra de Solapas / Tabs */
+        .nav-scroller {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--border-paper);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 0.5rem 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-scroller::-webkit-scrollbar { display: none; }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+            .nav-tabs { justify-content: flex-start; }
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-paper);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            padding: 0.6rem 1rem;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: var(--bg-paper);
+            color: var(--fluor-yellow);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 -3px 0 var(--fluor-pink);
+        }
+
+        /* Layout Principal */
+        .main-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem 1rem 4rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+        }
+
+        /* Grid Centrado */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .note-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-paper);
+            border-radius: 16px;
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .note-card::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+        }
+
+        .card-badge {
+            align-self: flex-start;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.725rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge-p { background: var(--postit-pink); color: var(--fluor-pink); border: 1px solid rgba(255, 102, 196, 0.3); }
+        .badge-y { background: var(--postit-yellow); color: var(--fluor-yellow); border: 1px solid rgba(255, 238, 85, 0.3); }
+        .badge-g { background: var(--postit-green); color: var(--fluor-green); border: 1px solid rgba(57, 255, 20, 0.3); }
+        .badge-c { background: var(--postit-cyan); color: var(--fluor-cyan); border: 1px solid rgba(0, 240, 255, 0.3); }
+
+        .note-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .tech-box {
+            font-size: 0.875rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 0.85rem;
+        }
+
+        .tech-box ul { list-style: none; padding-left: 0; }
+
+        .tech-box ul li {
+            position: relative;
+            padding-left: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .tech-box ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--fluor-cyan);
+        }
+
+        .human-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px dashed rgba(255, 238, 85, 0.3);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            margin-top: auto;
+        }
+
+        .human-header {
+            font-family: var(--font-hand);
+            font-size: 1.2rem;
+            color: var(--fluor-yellow);
+            margin-bottom: 0.3rem;
+        }
+
+        .human-text {
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.825rem;
+            margin-top: 0.5rem;
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 0.6rem 0.75rem;
+            border-bottom: 1px solid var(--border-paper);
+            text-align: left;
+        }
+
+        .custom-table th {
+            color: var(--fluor-cyan);
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Flashcards */
+        .flashcards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .flashcard {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-paper);
+            border-radius: 16px;
+            min-height: 220px;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fc-front, .fc-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            padding: 1.25rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fc-front {
+            background: var(--bg-paper);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .fc-back {
+            background: #0f172a;
+            border: 1.5px solid var(--fluor-pink);
+            transform: rotateY(180deg);
+        }
+
+        .fc-tag {
+            font-family: var(--font-mono);
+            background: var(--postit-pink);
+            color: var(--fluor-pink);
+            padding: 0.35rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.825rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+            border: 1px dashed var(--fluor-pink);
+        }
+
+        /* Quiz Card */
+        .quiz-wrapper {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--bg-paper);
+            border: 1px solid var(--border-paper);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-paper);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            color: #fff;
+            font-size: 0.875rem;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 0.6rem;
+        }
+
+        .quiz-option.correct {
+            background: rgba(57, 255, 20, 0.15) !important;
+            border-color: var(--fluor-green) !important;
+            color: var(--fluor-green) !important;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(255, 102, 196, 0.15) !important;
+            border-color: var(--fluor-pink) !important;
+            color: var(--fluor-pink) !important;
+        }
+
+        .quiz-feedback {
+            background: rgba(15, 23, 42, 0.8);
+            border-left: 3px solid var(--fluor-cyan);
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--fluor-pink), var(--fluor-purple));
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .video-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--border-paper);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-info h4 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .video-info p {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="notebook-title">
+                CUADERNO DE HEMATOLOGÍA <span class="notebook-tag">#ResumenEnfermería</span>
+            </div>
+
+            <div class="header-actions">
+                <button class="glossary-btn" onclick="toggleGlossaryModal()">
+                    📖 Diccionario de Unidades & Siglas
+                </button>
+
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" id="searchInput" placeholder="Buscar concepto o unidad (ej: g/dL, VCM, Bazo)..." onkeyup="filterNotes()">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modal Glosario de Unidades -->
+    <div class="modal-overlay" id="glossaryModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>📖 Diccionario Rápido de Unidades y Siglas</h3>
+                <button class="close-btn" onclick="toggleGlossaryModal()">&times;</button>
+            </div>
+            <div class="tech-box">
+                <ul style="line-height: 1.7;">
+                    <li><strong style="color: var(--fluor-yellow);">g/dL (Gramos por decilitro):</strong> Masa en gramos de hemoglobina presente en 100 mL de sangre. Indica la concentración total de hemoglobina.</li>
+                    <li><strong style="color: var(--fluor-pink);">fl (Femtolitros):</strong> Unidad de volumen ($10^{-15}$ L). Mide el <strong>tamaño de un solo glóbulo rojo</strong> (VCM).</li>
+                    <li><strong style="color: var(--fluor-cyan);">pg (Picogramos):</strong> Unidad de peso ($10^{-12}$ g). Mide el <strong>peso de la hemoglobina dentro de un eritrocito</strong> (HCM).</li>
+                    <li><strong style="color: var(--fluor-green);">VCM:</strong> Volumen Corpuscular Medio (Tamaño eritrocitario promedio; normal: 80-100 fl).</li>
+                    <li><strong style="color: var(--fluor-yellow);">HCM:</strong> Hemoglobina Corpuscular Media (Peso de la Hb por célula; normal: 27-33 pg).</li>
+                    <li><strong style="color: var(--fluor-pink);">CHCM:</strong> Concentración de Hemoglobina Corpuscular Media (Densidad de la Hb en una masa de glóbulos rojos; normal: 32-36 g/dL).</li>
+                    <li><strong style="color: var(--fluor-cyan);">Hb:</strong> Hemoglobina (Proteína transportadora de oxígeno dentro de los hematíes).</li>
+                    <li><strong style="color: var(--fluor-green);">FVW:</strong> Factor von Willebrand (Proteína endotelial que actúa como adhesivo para las plaquetas).</li>
+                    <li><strong style="color: var(--fluor-yellow);">t-PA:</strong> Activador Tisular del Plasminógeno (Enzima que activa la disolución del coágulo).</li>
+                    <li><strong style="color: var(--fluor-pink);">G (Gauge):</strong> Calibre interno de catéteres/agujas. A menor número G, más gruesa es la aguja (18G es más gruesa que 20G).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pestañas de Cuadernola -->
+    <nav class="nav-scroller">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchSection('sec-bases')">1. Hematopoyesis</button>
+            <button class="tab-btn" onclick="switchSection('sec-anemia')">2. Síndrome Anémico</button>
+            <button class="tab-btn" onclick="switchSection('sec-tipos')">3. Tipos de Anemia</button>
+            <button class="tab-btn" onclick="switchSection('sec-transfusion')">4. Transfusión</button>
+            <button class="tab-btn" onclick="switchSection('sec-hemostasia')">5. Coagulación</button>
+            <button class="tab-btn" onclick="switchSection('sec-trastornos')">6. Trastornos</button>
+            <button class="tab-btn" onclick="switchSection('sec-ayudamemorias')">Ayudamemorias</button>
+            <button class="tab-btn" onclick="switchSection('sec-quiz')">Examen</button>
+            <button class="tab-btn" onclick="switchSection('sec-videos')">Videos</button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-wrapper">
+
+        <!-- SECCIÓN 1: HEMATOPOYESIS -->
+        <section id="sec-bases" class="tab-content active">
+            <div class="section-header">
+                <h2>1. Bases Anatómicas del Sistema Hematopoyético</h2>
+                <p>Pasa el dedo o mouse sobre las unidades amarillas marcadas para ver su significado.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Médula Ósea</span>
+                    <h3>Fábrica Hematopoyética</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Ubicada dentro de huesos planos y cortos (<span class="hl-y">esternón, costillas, vértebras, pelvis</span>).</li>
+                            <li><span class="hl-p">Médula Roja:</span> Activa en producción celular (sensible a quimioterapia y radiación).</li>
+                            <li><span class="hl-y">Médula Amarilla:</span> Inactiva, rica en tejido adiposo.</li>
+                            <li>Lugar de maduración de los <span class="hl-g">Linfocitos B</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es la <span class="hl-y">fábrica principal de la ciudad</span>. La médula roja es la planta trabajando a pleno produciendo autos (células de la sangre). La amarilla es el depósito de al lado con galpones juntando grasa. Si la fábrica pierde la luz (quimio/radiación), la ciudad se queda sin autos nuevos.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-c">Líneas Celulares</span>
+                    <h3>Células Madre Pluripotenciales</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Células autorrenovables en médula ósea.</li>
+                            <li><span class="hl-c">Línea Mieloide:</span> Inmunidad innata, fagocitosis, inflamación. Da origen a eritrocitos, plaquetas y granulocitos.</li>
+                            <li><span class="hl-p">Línea Linfoide:</span> Inmunidad adaptativa. Linfocitos B (anticuerpos) y Linfocitos T (maduran en el Timo).</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es como la <span class="hl-c">materia prima o plastilina universal</span>. De ahí salen dos fuerzas de seguridad: la <em>Policía de Calle (Mieloide)</em> que limpia la mugre del día a día, y los <em>Agentes de Inteligencia (Linfoide)</em> que arman misiles teledirigidos para criminales específicos.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Filtro Sanguíneo</span>
+                    <h3>El Bazo (Pulpa Roja y Blanca)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-p">Pulpa Roja:</span> Destruye eritrocitos viejos o deteriorados y almacena plaquetas/granulocitos.</li>
+                            <li><span class="hl-g">Pulpa Blanca:</span> Tejido linfoide que filtra la sangre y genera respuesta inmune frente a antígenos circulantes.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es una <span class="hl-y">mezcla entre desguace de autos viejos y aduana de peaje</span>. La pulpa roja desarma los autos oxidados (glóbulos rojos aplastados tras 120 días). La pulpa blanca es el control policial del peaje que revisa los baúles buscando ladrones (bacterias).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-g">Protección Mucosa</span>
+                    <h3>MALT e Inmunoglobulina IgA</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Tejido linfoide en mucosas de aparato digestivo, bronquial, genitourinario, amígdalas y apéndice.</li>
+                            <li>Produce principalmente <span class="hl-g">IgA secretora</span> que atraviesa la mucosa y bloquea la entrada de patógenos.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es como poner <span class="hl-g">patovicas en la puerta del boliche</span>. La IgA es el patovica parado en la puerta (boca, pulmón o intestino) que ni siquiera deja que los gérmenes apoyen el pie adentro del local.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: SÍNDROME ANÉMICO -->
+        <section id="sec-anemia" class="tab-content">
+            <div class="section-header">
+                <h2>2. Síndrome Anémico y Criterios Diagnósticos</h2>
+                <p>Toca o pasa el mouse sobre las unidades (<span class="unit-def" data-def="g/dL = Gramos por decilitro. Mide la masa de Hemoglobina en 100 mL de sangre.">g/dL</span>, <span class="unit-def" data-def="fl = Femtolitros (10^-15 L). Mide el tamaño o volumen de 1 glóbulo rojo.">fl</span>, <span class="unit-def" data-def="pg = Picogramos (10^-12 g). Mide el peso de hemoglobina dentro de 1 glóbulo rojo.">pg</span>) para ver su definición exacta.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Umbrales OMS</span>
+                    <h3>Criterios Diagnósticos de Anemia</h3>
+                    <div class="tech-box">
+                        <p>Descenso de <span class="unit-def" data-def="Hb = Hemoglobina. Proteína que transporta el oxígeno en la sangre.">Hb</span> y Hematocrito según grupo:</p>
+                        <table class="custom-table">
+                            <thead>
+                                <tr><th>Población</th><th>Límite OMS (<span class="unit-def" data-def="Hb = Hemoglobina">Hb</span>) en <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Hombres adultos</td><td><span class="hl-p">&lt; 13 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
+                                <tr><td>Mujeres no embarazadas</td><td><span class="hl-y">&lt; 12 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
+                                <tr><td>Mujeres embarazadas</td><td><span class="hl-g">&lt; 11 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">La Hemoglobina son los <span class="hl-y">camiones de flete que reparten tubos de oxígeno</span>. Si tenés menos camiones que los del límite (regla 13-12-11), toda la ciudad empieza a andar despacio y con frío porque les falta aire a las calderas.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Clasificación Medular</span>
+                    <h3>Arregenerativas vs Regenerativas</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-p">Arregenerativas:</span> Producción insuficiente en médula (falta de insumos o aplasia).</li>
+                            <li><span class="hl-g">Regenerativas:</span> Médula sana que produce al máximo, pero hay pérdida sanguínea o hemólisis activa.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">En la <strong>Arregenerativa</strong>, la fábrica quebró o se quedó sin insumos. En la <strong>Regenerativa</strong>, la fábrica saca camiones al 200%, pero hay un loco afuera pinchándoles las ruedas o un zanjón por donde se caen.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-c">Índices Eritrocitarios</span>
+                    <h3>VCM (Tamaño) y HCM (Color)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="unit-def" data-def="VCM = Volumen Corpuscular Medio. Mide el tamaño medio del glóbulo rojo en femtolitros (fl).">VCM</span>: Normocítica (80-100 <span class="unit-def" data-def="fl = Femtolitros. Unidad de volumen para medir el tamaño de 1 hematíe.">fl</span>), Microcítica (&lt;80 <span class="unit-def" data-def="fl = Femtolitros">fl</span>), Macrocítica (&gt;100 <span class="unit-def" data-def="fl = Femtolitros">fl</span>).</li>
+                            <li><span class="unit-def" data-def="HCM = Hemoglobina Corpuscular Media. Mide el peso de Hb dentro de cada glóbulo en picogramos (pg).">HCM</span>: Hipocrómica (&lt;29 <span class="unit-def" data-def="pg = Picogramos. Unidad de peso para la Hb por glóbulo rojo.">pg</span>).</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">El VCM te dice <span class="hl-c">el tamaño del camioneto</span> (motito enana, camión normal o colectivo doble piso). El HCM te dice <span class="hl-y">qué tan pintado de rojo brillante está</span> (si viene cargado de pintura/oxígeno o pálido).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-g">Grados de Severidad</span>
+                    <h3>Clasificación Clínica por Hb</h3>
+                    <div class="tech-box">
+                        <table class="custom-table">
+                            <thead>
+                                <tr><th>Grado</th><th>Nivel de <span class="unit-def" data-def="Hb = Hemoglobina">Hb</span></th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Anemia Leve</td><td><span class="hl-g"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> &gt; 10 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
+                                <tr><td>Anemia Moderada</td><td><span class="hl-y"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> 8 a 10 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
+                                <tr><td>Anemia Grave</td><td><span class="hl-p"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> &lt; 8 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">En la <strong>Leve</strong> te agitas un poco en la escalera. En la <strong>Moderada</strong> te late fuerte el corazón al caminar. En la <strong>Grave (&lt;8)</strong> es una emergencia total por falta de aire en los órganos.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: TIPOS DE ANEMIA -->
+        <section id="sec-tipos" class="tab-content">
+            <div class="section-header">
+                <h2>3. Tipos Específicos de Anemia</h2>
+                <p>Valores técnicos: <span class="unit-def" data-def="fl = Femtolitros (tamaño eritrocitario)">fl</span>, <span class="unit-def" data-def="pg = Picogramos (peso de Hb en el eritrocito)">pg</span>, <span class="unit-def" data-def="CHCM = Concentración de Hemoglobina Corpuscular Media en g/dL">CHCM</span>.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Déficit de Hierro</span>
+                    <h3>Anemia Ferropénica</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Disminución de <span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> por agotamiento de reservas de hierro.</li>
+                            <li><span class="hl-y">Laboratorio:</span> Microcítica (<span class="unit-def" data-def="VCM = Tamaño del eritrocito">VCM</span> &lt; 80 <span class="unit-def" data-def="fl = Femtolitros">fl</span>) e Hipocrómica (<span class="unit-def" data-def="HCM = Peso de Hb en la célula">HCM</span> &lt; 29 <span class="unit-def" data-def="pg = Picogramos">pg</span>, <span class="unit-def" data-def="CHCM = Densidad de Hb en los glóbulos">CHCM</span> &lt; 32 <span class="unit-def" data-def="g/dL = Gramos por decilitro">g/dL</span>).</li>
+                            <li>Causada por pérdidas crónicas o aumento de requerimientos.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es como armar los camiones de flete pero <span class="hl-y">se te acabó la chapa de hierro</span>. La fábrica empieza a sacar <em>autitos enanos (microcíticos) y pálidos (hipocrómicos)</em> que apenas llevan oxígeno.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Falla en ADN</span>
+                    <h3>Anemia Megaloblástica (B12 / Folato / Omeprazol)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Falla en síntesis de ADN con ARN normal -&gt; <span class="hl-p">Macrocítica (<span class="unit-def" data-def="VCM = Tamaño eritrocitario">VCM</span> &gt; 100 <span class="unit-def" data-def="fl = Femtolitros">fl</span>)</span>.</li>
+                            <li>Causada por falta de B12/B9, vegetarismo estricto, atrofia gástrica (sin Factor Intrínseco) y fármacos (<span class="hl-y">Omeprazol, Metformina</span>).</li>
+                            <li><span class="hl-p">Síntomas:</span> Piel amarillenta, ictericia leve y <strong>Glositis Atrófica</strong> (lengua depapilada roja). Neurológicos solo en B12.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es como sacar fotocopias pero <span class="hl-p">la máquina no tiene tinta de ADN (falta B12/Fólico)</span>. La célula se infla como un colectivo gigante torpe (macrocítica) incapaz de dividirse. El Omeprazol le pone candado a la aduana del estómago que absorbe la B12. La lengua queda lisa como frutilla pelada (glositis).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-g">Destrucción Celular</span>
+                    <h3>Anemia Hemolítica</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Destrucción prematura de glóbulos rojos.</li>
+                            <li><span class="hl-g">Tríada Clínica:</span> Palidez, Ictericia (bilirrubina alta) y Esplenomegalia/Hepatomegalia (agrandamiento por trabajo excesivo).</li>
+                            <li>Puede ser Falciforme (eritrocitos en hoz) o Autoinmune.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Es como si <span class="hl-g">alguien estuviera reventando las ruedas de los camiones en la calle</span>. Como se rompen tantos camiones juntos, el desguace (bazo) se infla de tanto laburar (esplenomegalia) y el aceite volcado de los camiones te tiñe la piel de amarillo (ictericia).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-c">Deformidad Ósea</span>
+                    <h3>Talasemia y "Cráneo en Cepillo"</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Trastorno genético hereditario de síntesis de globina.</li>
+                            <li>La anemia severa provoca <span class="hl-c">hiperplasia medular expansiva</span> en huesos del cráneo.</li>
+                            <li><span class="hl-p">Signo Radiológico:</span> <strong>"Cráneo en Cepillo"</strong> (estrías verticales en radiografía).</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Como faltan camiones por falla genética, la fábrica del hueso entra en pánico y <span class="hl-c">rompe las paredes del galpón para agrandarse</span>. Al empujar las paredes del cráneo hacia afuera, en la radiografía se ven los pelos parados igual que las cerdas de un cepillo de dientes.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: TRANSFUSIÓN -->
+        <section id="sec-transfusion" class="tab-content">
+            <div class="section-header">
+                <h2>4. Terapia Transfusional y Enfermería</h2>
+                <p>Materiales: Catéter <span class="unit-def" data-def="G = Gauge. Calibre interno de la aguja. A menor número, más gruesa es la aguja (18G es más gruesa que 20G).">18G-20G</span> y Filtro <span class="unit-def" data-def="µm = Micrómetros (10^-6 metros). Tamaño de poro del filtro transfusional.">170-260 µm</span>.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Origen Físico vs Industrial</span>
+                    <h3>Hemocomponentes vs Hemoderivados</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-p">Hemocomponentes (Centrifugación física):</span> Concentrado de Eritrocitos, Plasma, Plaquetas, Crioprecipitados.</li>
+                            <li><span class="hl-y">Hemoderivados (Fraccionamiento industrial de plasma):</span> Albúmina, Factores de Coagulación (VIII, IX, X), Antitrombina III.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Los <strong>Hemocomponentes</strong> son como separar la leche en la granja: girás la centrífuga y sacás la crema (plasma), la leche (glóbulos) y la nata (plaquetas). Los <strong>Hemoderivados</strong> son productos de laboratorio farmacéutico industrial (proteína en polvo pura o frasquito de factor).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Protocolo 4P</span>
+                    <h3>Lista de Chequeo de Enfermería (4 Puntos)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-p">1. Paciente Correcto:</span> Doble identificación de receptor.</li>
+                            <li><span class="hl-y">2. Volumen Correcto:</span> Según indicación médica.</li>
+                            <li><span class="hl-g">3. Hemocomponente Correcto:</span> Grupo, Rh y compatibilidad.</li>
+                            <li><span class="hl-c">4. Vía / Vigilancia Correcta:</span> Permeabilidad (usar catéter <span class="unit-def" data-def="G = Gauge. Calibre de aguja (18G o 20G).">18G-20G</span> con filtro de <span class="unit-def" data-def="µm = Micrómetros (filtro de microagregados)">170-260 µm</span>).</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Transfundir es como <span class="hl-y">recibir un paquete de órgano vital por correo express</span>. Tenés que mirar 4 veces la etiqueta de la caja: que el destinatario sea exactamente el de la cama, la bolsa no esté dañada ni sea de otro grupo, y la manguera esté firme.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-g">Tiempo Límite</span>
+                    <h3>Regla de las 4 Horas Transfusionales</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>La infusión de un concentrado de eritrocitos jamás debe superar las <span class="hl-p">4 horas</span> desde su salida de banco de sangre.</li>
+                            <li>Previene la proliferación bacteriana a temperatura ambiente y la hemólisis del producto.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">La sangre fuera de la heladera del banco de sangre es como <span class="hl-g">un sachet de leche abierto al sol en verano</span>. Pasadas las 4 horas se llena de bacterias y las células se pudren. Si no bajó en 4 horas, se descarta.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: COAGULACIÓN -->
+        <section id="sec-hemostasia" class="tab-content">
+            <div class="section-header">
+                <h2>5. Fisiología de la Coagulación e Hemostasia</h2>
+                <p>Factores: <span class="unit-def" data-def="FVW = Factor von Willebrand (adhesivo plaquetario)">FVW</span>, <span class="unit-def" data-def="t-PA = Activador Tisular del Plasminógeno">t-PA</span>.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-c">Paso 1: Parche Rápido</span>
+                    <h3>Hemostasia Primaria (Vascular y Plaquetaria)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Vasoconstricción local (<span class="hl-c">Serotonina, Endotelina, TxA2</span>; caída de ON y PGI2).</li>
+                            <li>Adhesión plaquetaria al colágeno expuesto mediante el receptor <span class="hl-p">GP Ib</span> y el <span class="unit-def" data-def="FVW = Factor von Willebrand. Pegamento biológico endotelial.">FVW</span>.</li>
+                            <li>Formación del tapón hemostático primario temporal.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Se reventó una manguera en la pared. Lo primero que hacés es <span class="hl-c">apretar el caño para que salga menos agua (vasoconstricción)</span> y ponés una <span class="hl-p">cinta adhesiva provisoria (plaquetas con el pegamento FVW)</span> para tapar el hueco rápido.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Paso 2: Hormigón Armado</span>
+                    <h3>Hemostasia Secundaria (Trombina y Fibrina)</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Cascada enzimática que convierte la protrombina en <span class="hl-p">Trombina</span>.</li>
+                            <li>La Trombina transforma el <span class="hl-y">Fibrinógeno</span> soluble en una malla de <span class="hl-g">Fibrina</span> insoluble.</li>
+                            <li>Consolida el coágulo hemostático definitivo.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">La cinta adhesiva provisoria no aguanta la presión del agua por mucho tiempo. Así que viene el albañil y <span class="hl-p">le tira cemento con una malla de alambre tejida (red de fibrina)</span> sobre la cinta. Ahora sí quedó una pared de hormigón armado fija.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Factores de Coagulación</span>
+                    <h3>Regla Vitamina K (1972) y Excepción del FVW</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li>Todos los factores se sintetizan en el hígado EXCEPTUANDO el <span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span> (producido por endotelio y megacariocitos).</li>
+                            <li>Factores dependientes de Vitamina K: <span class="hl-p">Factores II, VII, IX y X</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">La Vitamina K son las <span class="hl-y">pilas alcalinas que necesitan 4 herramientas específicas (10, 9, 7 y 2 -&gt; 1972)</span> para encenderse. El Factor von Willebrand es la única herramienta que no se hace en la fábrica central (hígado), sino en los talleres del caño (endotelio).</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-g">Limpieza del Coágulo</span>
+                    <h3>Anticoagulantes Naturales y Plasmina</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-g">Antitrombina III:</span> Inactiva Trombina y Factor Xa.</li>
+                            <li><span class="hl-c">Proteína C / S:</span> Inactiva factores Va y VIIIa.</li>
+                            <li><span class="hl-p">Fibrinólisis (<span class="unit-def" data-def="t-PA = Activador Tisular del Plasminógeno">t-PA</span> y Plasmina):</span> La plasmina degrada la fibrina tras la cicatrización.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">Son los <span class="hl-g">inspectores de obra y la cuadrilla de limpieza</span>. Si el albañil tira cemento sin control, te tapona el caño por dentro (trombosis). Los inspectores frenan al albañil y la Plasmina viene con el martillo neumático a sacar el cemento sobrante.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: TRASTORNOS -->
+        <section id="sec-trastornos" class="tab-content">
+            <div class="section-header">
+                <h2>6. Trastornos Hemorrágicos y Trombóticos</h2>
+                <p>Hemofilias A y B, enfermedad de von Willebrand (<span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span>) y trombofilias.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="note-card searchable">
+                    <span class="card-badge badge-p">Hemorragias</span>
+                    <h3>Hemofilia A (VIII), Hemofilia B (IX) y vWD</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-p">Hemofilia A:</span> Déficit del Factor VIII.</li>
+                            <li><span class="hl-y">Hemofilia B:</span> Déficit del Factor IX.</li>
+                            <li><span class="hl-g">Enfermedad de von Willebrand:</span> Alteración en la adhesión plaquetaria y transporte del FVIII por falla de <span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">En las hemofilias <span class="hl-p">te falta una pieza clave de la máquina de hacer cemento (pieza 8 en la A, pieza 9 en la B)</span>. Por más cinta adhesiva que pongas, el cemento nunca se endurece y no para de sangrar.</div>
+                    </div>
+                </div>
+
+                <div class="note-card searchable">
+                    <span class="card-badge badge-y">Hipercoagulabilidad</span>
+                    <h3>Trombofilias y Factor V Leiden</h3>
+                    <div class="tech-box">
+                        <ul>
+                            <li><span class="hl-y">Factor V Leiden:</span> Mutación que vuelve al Factor V resistente a la inactivación por Proteína C.</li>
+                            <li>Deficiencia de Antitrombina III o Proteína C/S.</li>
+                            <li>Síndrome Antifosfolípido (autoinmune, trombosis + pérdidas gestacionales).</li>
+                        </ul>
+                    </div>
+                    <div class="human-box">
+                        <div class="human-header">✎ En criollo:</div>
+                        <div class="human-text">En el Factor V Leiden, a la hormigonera de cemento <span class="hl-y">se le rompió la palanca de apagado</span>. Los inspectores gritan que pare, pero la máquina sigue volcando cemento hasta que te tapona una vena entera.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN AYUDAMEMORIAS -->
+        <section id="sec-ayudamemorias" class="tab-content">
+            <div class="section-header">
+                <h2>Ayudamemorias Clínicos (Flashcards)</h2>
+                <p>Toca cada tarjeta para darla vuelta y repasar antes del examen.</p>
+            </div>
+
+            <div class="flashcards-container">
+                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="fc-front">
+                            <div>
+                                <span class="card-badge badge-y">Factores K-Dependientes</span>
+                                <h3>¿Cuáles factores necesitan Vitamina K?</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
+                            </div>
+                        </div>
+                        <div class="fc-back">
+                            <div>
+                                <h3>Regla del Año "1972"</h3>
+                                <div class="fc-tag">Factores: 10 (X), 9 (IX), 7 (VII), 2 (II)</div>
+                                <p style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.5rem;">✎ En criollo: Las 4 herramientas que necesitan pilas alcalinas (Vit-K) para encender.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="fc-front">
+                            <div>
+                                <span class="card-badge badge-p">Hemofilias A y B</span>
+                                <h3>¿Qué factor falta en Hemofilia A y B?</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
+                            </div>
+                        </div>
+                        <div class="fc-back">
+                            <div>
+                                <h3>"A-8 / B-9"</h3>
+                                <div class="fc-tag">Hemofilia A = Factor VIII (8)<br>Hemofilia B = Factor IX (9)</div>
+                                <p style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.5rem;">✎ En criollo: Falta la pieza 8 o 9 de la máquina de cemento.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="fc-front">
+                            <div>
+                                <span class="card-badge badge-c">Límites OMS Hemoglobina</span>
+                                <h3>Valores para definir anemia OMS</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
+                            </div>
+                        </div>
+                        <div class="fc-back">
+                            <div>
+                                <h3>Secuencia "13 - 12 - 11" en <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></h3>
+                                <div class="fc-tag">Hombres &lt; 13 g/dL<br>Mujeres &lt; 12 g/dL<br>Embarazadas &lt; 11 g/dL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="fc-front">
+                            <div>
+                                <span class="card-badge badge-g">Chequeo Transfusión</span>
+                                <h3>Lista de Verificación de Enfermería</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
+                            </div>
+                        </div>
+                        <div class="fc-back">
+                            <div>
+                                <h3>Protocolo "4 Puntos"</h3>
+                                <div class="fc-tag">1. Paciente correcto<br>2. Volumen correcto<br>3. Hemocomponente<br>4. Vía intravenosa</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN EXAMEN QUIZ -->
+        <section id="sec-quiz" class="tab-content">
+            <div class="section-header">
+                <h2>Examen de Práctica de Enfermería</h2>
+                <p>Evaluación con fundamentos técnicos y explicaciones sencillas.</p>
+            </div>
+
+            <div class="quiz-wrapper">
+                <div style="font-size: 0.8rem; color: var(--fluor-yellow); font-weight: 700; margin-bottom: 0.4rem;" id="qIndex">PREGUNTA 1 DE 6</div>
+                <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 1.25rem;" id="qPrompt">Cargando pregunta...</h3>
+                <div id="qOptions"></div>
+                <div class="quiz-feedback" id="qFeedback"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <span id="qScore" style="font-size: 0.85rem; color: var(--text-muted);">Puntaje: 0</span>
+                    <button class="btn-action" onclick="nextQuizQuestion()">Siguiente Pregunta ➔</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN VIDEOS -->
+        <section id="sec-videos" class="tab-content">
+            <div class="section-header">
+                <h2>Videos Explicativos Incorporados</h2>
+                <p>Reproductores listos para ver en pantalla completa.</p>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube-nocookie.com/embed/94Qae5w_Rvg" title="Cascada de Coagulación" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Cascada de Coagulación e Hemostasia</h4>
+                        <p>Paso a paso de la hemostasia primaria y secundaria.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube-nocookie.com/embed/rqWzCqZcQvM" title="Fisiopatología de las Anemias" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Fisiopatología de las Anemias</h4>
+                        <p>Clasificación morfológica y clínica completa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Modal Glosario
+        function toggleGlossaryModal() {
+            const modal = document.getElementById('glossaryModal');
+            modal.classList.toggle('active');
+        }
+
+        // Cambio de sección
+        function switchSection(secId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            const target = document.getElementById(secId);
+            if (target) target.classList.add('active');
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Buscador
+        function filterNotes() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const items = document.querySelectorAll('.searchable');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Quiz
+        const quizBank = [
+            {
+                prompt: "¿Cuál de los siguientes factores de coagulación es producido por células endoteliales y megacariocitos, y NO por el hígado?",
+                options: ["Factor II", "Factor VIII", "Factor von Willebrand (FVW)", "Factor X"],
+                correct: 2,
+                explain: "¡Exacto! El Factor von Willebrand (FVW) no se sintetiza en el hígado, sino en el tejido endotelial y megacariocitos."
+            },
+            {
+                prompt: "En una mujer no embarazada, ¿cuál es el nivel umbral de Hemoglobina para diagnosticar Anemia según la OMS?",
+                options: ["< 13 g/dL", "< 12 g/dL", "< 11 g/dL", "< 10 g/dL"],
+                correct: 1,
+                explain: "¡Correcto! Regla 13-12-11: Hombres <13 g/dL, Mujeres <12 g/dL, Embarazadas <11 g/dL."
+            },
+            {
+                prompt: "¿Cuáles factores de coagulación dependen de la Vitamina K?",
+                options: ["I, V, VIII y X", "II, VII, IX y X", "VIII, IX, XI y XII", "I, II, V y VII"],
+                correct: 1,
+                explain: "¡Muy bien! Recuerda la regla del año '1972' (10, 9, 7 y 2)."
+            },
+            {
+                prompt: "El signo radiológico de 'Cráneo en Cepillo' en la Talasemia se debe a:",
+                options: ["Infección ósea", "Hiperplasia expansiva de la médula ósea", "Sobrecarga de hierro", "Deficiencia de calcio"],
+                correct: 1,
+                explain: "¡Correcto! La anemia severa estimula la hiperplasia expansiva de la médula ósea dentro de los huesos planos del cráneo."
+            },
+            {
+                prompt: "¿Cuál es el tiempo máximo de infusión permitido para un concentrado de eritrocitos?",
+                options: ["2 horas", "4 horas", "6 horas", "8 horas"],
+                correct: 1,
+                explain: "¡Correcto! Máximo 4 horas fuera de la heladera del banco de sangre para evitar la proliferación bacteriana y la lisis celular."
+            }
+        ];
+
+        let curQ = 0;
+        let scoreCount = 0;
+        let answeredQ = false;
+
+        function loadQuizQ() {
+            answeredQ = false;
+            const q = quizBank[curQ];
+            document.getElementById('qIndex').innerText = `PREGUNTA ${curQ + 1} DE ${quizBank.length}`;
+            document.getElementById('qPrompt').innerText = q.prompt;
+
+            const box = document.getElementById('qOptions');
+            box.innerHTML = '';
+
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerText = `${String.fromCharCode(65 + i)}. ${opt}`;
+                btn.onclick = () => answerQuiz(i);
+                box.appendChild(btn);
+            });
+
+            document.getElementById('qFeedback').style.display = 'none';
+        }
+
+        function answerQuiz(idx) {
+            if (answeredQ) return;
+            answeredQ = true;
+
+            const q = quizBank[curQ];
+            const btns = document.querySelectorAll('.quiz-option');
+            const fb = document.getElementById('qFeedback');
+
+            if (idx === q.correct) {
+                btns[idx].classList.add('correct');
+                fb.style.borderColor = 'var(--fluor-green)';
+                fb.innerHTML = `<strong>¡Correcto!</strong> ${q.explain}`;
+                scoreCount += 10;
+            } else {
+                btns[idx].classList.add('wrong');
+                btns[q.correct].classList.add('correct');
+                fb.style.borderColor = 'var(--fluor-pink)';
+                fb.innerHTML = `<strong>Incorrecto.</strong> ${q.explain}`;
+            }
+
+            fb.style.display = 'block';
+            document.getElementById('qScore').innerText = `Puntaje: ${scoreCount}`;
+        }
+
+        function nextQuizQuestion() {
+            curQ = (curQ + 1) % quizBank.length;
+            loadQuizQ();
+        }
+
+        loadQuizQ();
+    </script>
+</body>
+</html>
