@@ -2,36 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Cuaderno de Estudio - Hematología para Enfermería</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Manual Hematología - Glosario a Mano Izquierda & Banco de Preguntas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-board: #0f172a;
-            --bg-paper: #1e293b;
-            --bg-card: #182232;
-            --border-paper: rgba(255, 255, 255, 0.1);
+            --bg-board: #0b1329;
+            --bg-paper: #162035;
+            --bg-card: #1c2a45;
+            --border-paper: rgba(255, 255, 255, 0.15);
             --text-main: #f8fafc;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
             
-            /* Colores Flúor Subrayadores */
             --fluor-yellow: #ffee55;
             --fluor-pink: #ff66c4;
             --fluor-green: #39ff14;
             --fluor-cyan: #00f0ff;
             --fluor-purple: #c77dff;
             
-            /* Post-it / Sticky notes */
-            --postit-yellow: rgba(255, 238, 85, 0.12);
-            --postit-pink: rgba(255, 102, 196, 0.12);
-            --postit-green: rgba(57, 255, 20, 0.12);
-            --postit-cyan: rgba(0, 240, 255, 0.12);
+            --postit-yellow: rgba(255, 238, 85, 0.15);
+            --postit-pink: rgba(255, 102, 196, 0.15);
+            --postit-green: rgba(57, 255, 20, 0.15);
+            --postit-cyan: rgba(0, 240, 255, 0.15);
             
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             --font-hand: 'Caveat', cursive;
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -39,339 +37,173 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-board);
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            font-size: 16px;
+            line-height: 1.5;
         }
 
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-board);
-            background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: var(--text-main);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
         }
 
-        /* Subrayados Flúor */
-        .hl-y { background: linear-gradient(120deg, rgba(255, 238, 85, 0.35) 0%, rgba(255, 238, 85, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
-        .hl-p { background: linear-gradient(120deg, rgba(255, 102, 196, 0.35) 0%, rgba(255, 102, 196, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
-        .hl-g { background: linear-gradient(120deg, rgba(57, 255, 20, 0.35) 0%, rgba(57, 255, 20, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
-        .hl-c { background: linear-gradient(120deg, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0.35) 100%); color: #ffffff; padding: 0 4px; border-radius: 3px; font-weight: 700; }
+        .hl-y { background: rgba(255, 238, 85, 0.3); color: #fff; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+        .hl-p { background: rgba(255, 102, 196, 0.3); color: #fff; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+        .hl-g { background: rgba(57, 255, 20, 0.3); color: #fff; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
+        .hl-c { background: rgba(0, 240, 255, 0.3); color: #fff; padding: 1px 5px; border-radius: 4px; font-weight: 700; }
 
-        /* Interactivo: Definición de Unidades con Tooltip Flúor */
-        .unit-def {
-            border-bottom: 2px dotted var(--fluor-yellow);
-            color: var(--fluor-yellow);
-            cursor: pointer;
-            position: relative;
-            font-weight: 700;
-            display: inline-block;
-        }
-
-        .unit-def:hover::after, .unit-def:focus::after {
-            content: attr(data-def);
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0f172a;
-            border: 1.5px solid var(--fluor-yellow);
-            color: #ffffff;
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.775rem;
-            font-weight: 500;
-            white-space: normal;
-            min-width: 220px;
-            max-width: 280px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 150;
-            line-height: 1.4;
-            font-family: var(--font-sans);
-        }
-
-        /* Header Principal */
-        .app-header {
-            width: 100%;
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
-            padding: 1rem;
+        /* ENCABEZADO STICKY PERMANENTE */
+        .header-sticky-wrapper {
             position: sticky;
             top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
+            z-index: 150;
+            width: 100%;
+            background: rgba(11, 19, 41, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
-        .header-content {
-            max-width: 1200px;
-            width: 100%;
+        .header-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: calc(8px + env(safe-area-inset-top)) 1rem 0.5rem 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .notebook-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .notebook-tag {
-            font-family: var(--font-hand);
-            font-size: 1.35rem;
-            color: var(--fluor-yellow);
-            transform: rotate(-2deg);
-            display: inline-block;
-        }
-
-        .header-actions {
-            display: flex;
             gap: 0.75rem;
-            align-items: center;
             flex-wrap: wrap;
         }
 
-        .glossary-btn {
-            background: var(--postit-yellow);
-            border: 1px dashed var(--fluor-yellow);
-            color: var(--fluor-yellow);
-            padding: 0.45rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.825rem;
-            font-weight: 700;
-            cursor: pointer;
+        .brand-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        .glossary-btn:hover {
-            background: rgba(255, 238, 85, 0.25);
-        }
+        .brand-tag { font-family: var(--font-hand); font-size: 1.25rem; color: var(--fluor-yellow); }
 
-        .search-box {
-            position: relative;
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
             flex: 1;
-            max-width: 340px;
-            min-width: 220px;
+            justify-content: flex-end;
+            min-width: 260px;
         }
 
-        .search-box input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 99px;
-            padding: 0.5rem 1rem 0.5rem 2.4rem;
-            color: #fff;
-            font-size: 0.875rem;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--fluor-cyan);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
-
-        .search-box svg {
-            position: absolute;
-            left: 0.85rem;
-            top: 50%;
-            transform: translateY(-50%);
-            fill: var(--text-muted);
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Modal Glosario de Unidades */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(5px);
-            z-index: 200;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: var(--bg-paper);
-            border: 2px solid var(--fluor-yellow);
-            border-radius: 16px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-paper);
-            padding-bottom: 0.5rem;
-        }
-
-        .modal-header h3 {
-            font-size: 1.2rem;
-            color: var(--fluor-yellow);
-        }
-
-        .close-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
+        .btn-header {
+            height: 42px;
+            padding: 0 0.85rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            white-space: nowrap;
+            touch-action: manipulation;
+            border: 1px solid transparent;
         }
 
-        /* Barra de Solapas / Tabs */
+        .btn-note-add { background: var(--postit-pink); border-color: var(--fluor-pink); color: var(--fluor-pink); }
+        .btn-header:active { transform: scale(0.96); }
+
+        .search-box { position: relative; flex: 1; max-width: 260px; min-width: 150px; }
+        .search-box input {
+            width: 100%; height: 42px; background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-paper); border-radius: 10px; padding: 0 0.85rem 0 2.2rem;
+            color: #fff; font-size: 16px;
+        }
+        .search-box input:focus { outline: none; border-color: var(--fluor-cyan); }
+        .search-box svg { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; fill: var(--text-muted); }
+
+        /* NAVEGACIÓN DE PESTAÑAS */
         .nav-scroller {
-            width: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid var(--border-paper);
-            display: flex;
-            justify-content: center;
-            overflow-x: auto;
-            padding: 0.5rem 1rem;
-            -webkit-overflow-scrolling: touch;
+            width: 100%; overflow-x: auto; padding: 0.4rem 1rem 0.6rem 1rem;
+            -webkit-overflow-scrolling: touch; background: rgba(15, 23, 42, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
-
         .nav-scroller::-webkit-scrollbar { display: none; }
-
-        .nav-tabs {
-            display: flex;
-            gap: 0.5rem;
-            max-width: 1200px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        @media (max-width: 900px) {
-            .nav-tabs { justify-content: flex-start; }
-        }
+        .nav-tabs { display: flex; gap: 0.4rem; max-width: 1400px; margin: 0 auto; justify-content: flex-start; }
 
         .tab-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-paper);
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-            padding: 0.6rem 1rem;
-            color: var(--text-sub);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .tab-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-paper);
+            border-radius: 8px; height: 42px; padding: 0 0.9rem; color: var(--text-sub);
+            font-size: 0.875rem; font-weight: 600; cursor: pointer; white-space: nowrap;
+            display: inline-flex; align-items: center; touch-action: manipulation;
         }
 
         .tab-btn.active {
-            background: var(--bg-paper);
-            color: var(--fluor-yellow);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 -3px 0 var(--fluor-pink);
+            background: var(--bg-paper); color: var(--fluor-yellow);
+            border-color: var(--fluor-yellow); box-shadow: 0 0 10px rgba(255, 238, 85, 0.25);
         }
 
-        /* Layout Principal */
-        .main-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            padding: 2rem 1rem 4rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* ESTRUCTURA PRINCIPAL CON GLOSARIO A MANO IZQUIERDA */
+        .app-body-container {
+            max-width: 1400px; width: 100%; margin: 0 auto;
+            display: flex; gap: 1.25rem; padding: 1.25rem 1rem 4rem 1rem; align-items: flex-start;
         }
 
-        .tab-content {
-            display: none;
-            width: 100%;
+        /* GLOSARIO PERMANENTE A MANO IZQUIERDA */
+        .left-sidebar-glossary {
+            width: 320px; flex-shrink: 0; background: var(--bg-paper);
+            border: 1.5px solid var(--fluor-yellow); border-radius: 16px; padding: 1.15rem;
+            position: sticky; top: 125px; max-height: calc(100vh - 140px); overflow-y: auto;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
 
-        .tab-content.active {
-            display: block;
+        .glossary-title {
+            font-size: 1.05rem; font-weight: 800; color: var(--fluor-yellow);
+            margin-bottom: 0.85rem; padding-bottom: 0.5rem; border-bottom: 1px dashed rgba(255, 238, 85, 0.3);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            width: 100%;
+        .glossary-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .glossary-item { background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-paper); border-radius: 10px; padding: 0.7rem 0.85rem; }
+        .glossary-term { font-weight: 700; font-size: 0.9rem; color: var(--fluor-cyan); margin-bottom: 0.2rem; }
+        .glossary-desc { font-size: 0.825rem; color: var(--text-sub); line-height: 1.4; }
+
+        .main-wrapper { flex: 1; min-width: 0; width: 100%; }
+
+        @media (max-width: 899px) {
+            .app-body-container { flex-direction: column; }
+            .left-sidebar-glossary { width: 100%; position: static; max-height: none; }
         }
 
-        .section-header h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #fff;
-        }
+        .tab-content { display: none; width: 100%; }
+        .tab-content.active { display: block; }
 
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.4rem;
-        }
+        .section-header { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        .section-header h2 { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .section-header p { color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem; }
 
-        /* Grid Centrado */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            justify-content: center;
-        }
+        .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; width: 100%; }
+        @media (min-width: 720px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .note-card {
-            background: var(--bg-paper);
-            border: 1px solid var(--border-paper);
-            border-radius: 16px;
-            padding: 1.35rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .note-card::before {
-            content: "";
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 14px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 2px;
+            background: var(--bg-paper); border: 1px solid var(--border-paper);
+            border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column;
+            justify-content: space-between; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
         }
 
         .card-badge {
-            align-self: flex-start;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.725rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            align-self: flex-start; padding: 0.25rem 0.6rem; border-radius: 6px;
+            font-size: 0.725rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.65rem;
         }
 
         .badge-p { background: var(--postit-pink); color: var(--fluor-pink); border: 1px solid rgba(255, 102, 196, 0.3); }
@@ -379,856 +211,1405 @@
         .badge-g { background: var(--postit-green); color: var(--fluor-green); border: 1px solid rgba(57, 255, 20, 0.3); }
         .badge-c { background: var(--postit-cyan); color: var(--fluor-cyan); border: 1px solid rgba(0, 240, 255, 0.3); }
 
-        .note-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.75rem;
-        }
-
-        .tech-box {
-            font-size: 0.875rem;
-            color: var(--text-sub);
-            line-height: 1.6;
-            margin-bottom: 0.85rem;
-        }
-
+        .note-card h3 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.65rem; }
+        .tech-box { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 0.85rem; }
         .tech-box ul { list-style: none; padding-left: 0; }
-
-        .tech-box ul li {
-            position: relative;
-            padding-left: 1.1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .tech-box ul li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--fluor-cyan);
-        }
+        .tech-box ul li { position: relative; padding-left: 1.1rem; margin-bottom: 0.45rem; }
+        .tech-box ul li::before { content: "▸"; position: absolute; left: 0; color: var(--fluor-cyan); }
 
         .human-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px dashed rgba(255, 238, 85, 0.3);
-            border-radius: 12px;
-            padding: 0.85rem 1rem;
-            margin-top: auto;
+            background: rgba(11, 19, 41, 0.75); border: 1px dashed rgba(255, 238, 85, 0.35);
+            border-radius: 12px; padding: 0.85rem 0.95rem; margin-top: auto;
         }
 
-        .human-header {
-            font-family: var(--font-hand);
-            font-size: 1.2rem;
-            color: var(--fluor-yellow);
-            margin-bottom: 0.3rem;
+        .human-header { font-family: var(--font-hand); font-size: 1.25rem; color: var(--fluor-yellow); margin-bottom: 0.25rem; }
+        .human-text { font-size: 0.875rem; color: #e2e8f0; line-height: 1.5; }
+
+        .custom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.5rem; }
+        .custom-table th, .custom-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border-paper); text-align: left; }
+        .custom-table th { color: var(--fluor-cyan); font-weight: 700; background: rgba(255, 255, 255, 0.04); }
+
+        /* POP-ITS */
+        .popit-section {
+            width: 100%; margin-top: 2rem; background: rgba(22, 32, 53, 0.8);
+            border: 1.5px dashed var(--fluor-pink); border-radius: 20px; padding: 1.25rem;
         }
 
-        .human-text {
-            font-size: 0.85rem;
-            color: #e2e8f0;
-            line-height: 1.5;
-        }
+        .popit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        .popit-header h3 { font-family: var(--font-hand); font-size: 1.6rem; color: var(--fluor-pink); }
+        .popit-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media (min-width: 600px) { .popit-grid { grid-template-columns: repeat(2, 1fr); } }
 
-        .custom-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.825rem;
-            margin-top: 0.5rem;
-        }
+        .popit-card { background: var(--postit-pink); border: 1px solid var(--fluor-pink); border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+        .popit-card textarea { width: 100%; background: transparent; border: none; color: #fff; font-family: var(--font-hand); font-size: 1.25rem; resize: vertical; min-height: 80px; outline: none; }
+        .popit-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .btn-del-popit { background: rgba(255,255,255,0.1); border: none; color: #ff4d4d; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: 700; }
 
-        .custom-table th, .custom-table td {
-            padding: 0.6rem 0.75rem;
-            border-bottom: 1px solid var(--border-paper);
-            text-align: left;
-        }
+        /* FLASHCARDS */
+        .flashcards-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; width: 100%; }
+        @media (min-width: 720px) { .flashcards-container { grid-template-columns: repeat(2, 1fr); } }
 
-        .custom-table th {
-            color: var(--fluor-cyan);
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.03);
-        }
+        .flashcard-box-fix { height: 250px; width: 100%; perspective: 1000px; -webkit-perspective: 1000px; cursor: pointer; touch-action: manipulation; }
+        .fc-inner-fix { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .flashcard-box-fix.flipped .fc-inner-fix { transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
 
-        /* Flashcards */
-        .flashcards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-            width: 100%;
-            justify-content: center;
-        }
+        .fc-side { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+        .fc-side-front { background: var(--bg-paper); border: 1.5px solid var(--fluor-yellow); }
+        .fc-side-back { background: #0f182e; border: 2px solid var(--fluor-pink); transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+        .fc-tap-hint { font-size: 0.75rem; font-weight: 700; color: var(--fluor-cyan); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .flashcard {
-            background: var(--bg-paper);
-            border: 1px solid var(--border-paper);
-            border-radius: 16px;
-            min-height: 220px;
-            cursor: pointer;
-            perspective: 1000px;
-        }
-
-        .flashcard-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 16px;
-        }
-
-        .flashcard.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
-
-        .fc-front, .fc-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            padding: 1.25rem;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .fc-front {
-            background: var(--bg-paper);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .fc-back {
-            background: #0f172a;
-            border: 1.5px solid var(--fluor-pink);
-            transform: rotateY(180deg);
-        }
-
-        .fc-tag {
-            font-family: var(--font-mono);
-            background: var(--postit-pink);
-            color: var(--fluor-pink);
-            padding: 0.35rem 0.65rem;
-            border-radius: 6px;
-            font-size: 0.825rem;
-            display: inline-block;
-            margin-top: 0.5rem;
-            border: 1px dashed var(--fluor-pink);
-        }
-
-        /* Quiz Card */
-        .quiz-wrapper {
-            max-width: 720px;
-            width: 100%;
-            margin: 0 auto;
-            background: var(--bg-paper);
-            border: 1px solid var(--border-paper);
-            border-radius: 20px;
-            padding: 1.5rem;
-        }
-
+        /* QUIZ CON RESALTADO CLARO DE LA OPCIÓN CORRECTA */
+        .quiz-topic-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center; }
+        .topic-chip { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-paper); border-radius: 10px; padding: 0.6rem 1rem; color: var(--text-sub); font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+        .topic-chip.active { background: var(--postit-pink); color: var(--fluor-pink); border-color: var(--fluor-pink); }
+        .quiz-wrapper { max-width: 780px; width: 100%; margin: 0 auto; background: var(--bg-paper); border: 1.5px solid var(--border-paper); border-radius: 20px; padding: 1.5rem; }
+        .quiz-progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; margin-bottom: 1.25rem; overflow: hidden; }
+        .quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--fluor-pink), var(--fluor-cyan)); width: 0%; transition: width 0.3s ease; }
+        
         .quiz-option {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-paper);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-paper);
+            border-radius: 12px; min-height: 52px; padding: 0.75rem 1rem;
+            color: #fff; font-size: 0.95rem; text-align: left; cursor: pointer; width: 100%; margin-bottom: 0.75rem; display: flex; align-items: center; transition: all 0.2s ease;
+        }
+
+        /* Resaltado de Respuesta Correcta e Incorrecta Impecable */
+        .quiz-option.opt-correct {
+            background: rgba(57, 255, 20, 0.22) !important;
+            border: 2px solid var(--fluor-green) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+        }
+
+        .quiz-option.opt-wrong {
+            background: rgba(255, 102, 196, 0.22) !important;
+            border: 2px solid var(--fluor-pink) !important;
+            color: #ffffff !important;
+            opacity: 0.8;
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+        }
+
+        .quiz-correct-banner {
+            background: rgba(57, 255, 20, 0.15);
+            border: 1.5px solid var(--fluor-green);
+            color: var(--fluor-green);
+            padding: 0.85rem 1rem;
             border-radius: 10px;
-            padding: 0.85rem 1rem;
-            color: #fff;
-            font-size: 0.875rem;
-            text-align: left;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 0.6rem;
-        }
-
-        .quiz-option.correct {
-            background: rgba(57, 255, 20, 0.15) !important;
-            border-color: var(--fluor-green) !important;
-            color: var(--fluor-green) !important;
-        }
-
-        .quiz-option.wrong {
-            background: rgba(255, 102, 196, 0.15) !important;
-            border-color: var(--fluor-pink) !important;
-            color: var(--fluor-pink) !important;
-        }
-
-        .quiz-feedback {
-            background: rgba(15, 23, 42, 0.8);
-            border-left: 3px solid var(--fluor-cyan);
-            padding: 0.85rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
+            font-weight: 700;
             margin-bottom: 1rem;
             display: none;
-            line-height: 1.5;
         }
 
-        .btn-action {
-            background: linear-gradient(135deg, var(--fluor-pink), var(--fluor-purple));
-            color: #fff;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
+        .quiz-feedback { background: rgba(11, 19, 41, 0.95); border-left: 4px solid var(--fluor-cyan); padding: 1rem; border-radius: 10px; font-size: 0.9rem; margin-bottom: 1rem; display: none; line-height: 1.6; }
+        .btn-action { background: linear-gradient(135deg, var(--fluor-pink), var(--fluor-purple)); color: #fff; border: none; height: 48px; padding: 0 1.5rem; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
 
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .video-card {
-            background: var(--bg-paper);
-            border: 1px solid var(--border-paper);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .video-info {
-            padding: 1rem;
-        }
-
-        .video-info h4 {
-            font-size: 0.95rem;
-            color: #fff;
-            margin-bottom: 0.3rem;
-        }
-
-        .video-info p {
-            font-size: 0.825rem;
-            color: var(--text-muted);
-        }
+        /* VIDEOS */
+        .video-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; width: 100%; }
+        @media (min-width: 720px) { .video-grid { grid-template-columns: repeat(2, 1fr); } }
+        .video-card-item { background: var(--bg-paper); border: 1px solid var(--border-paper); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+        .video-thumb-preview { width: 100%; height: 200px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
+        .play-btn-overlay { width: 60px; height: 60px; background: rgba(255, 102, 196, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(255, 102, 196, 0.6); }
+        .play-btn-overlay::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
+        .video-details { padding: 1.25rem; }
+        .video-details h4 { font-size: 1.05rem; color: #fff; margin-bottom: 0.4rem; font-weight: 700; }
+        .video-details p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .btn-play-yt { width: 100%; height: 46px; background: #ff0000; color: #fff; border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <!-- Header Principal -->
-    <header class="app-header">
-        <div class="header-content">
-            <div class="notebook-title">
-                CUADERNO DE HEMATOLOGÍA <span class="notebook-tag">#ResumenEnfermería</span>
+    <!-- BARRA SUPERIOR STICKY PERMANENTE -->
+    <div class="header-sticky-wrapper">
+        <div class="header-top">
+            <div class="brand-title">
+                HEMATO MANUAL <span class="brand-tag">#Enfermería</span>
             </div>
 
-            <div class="header-actions">
-                <button class="glossary-btn" onclick="toggleGlossaryModal()">
-                    📖 Diccionario de Unidades & Siglas
+            <div class="header-controls">
+                <button class="btn-header btn-note-add" onclick="addPopit()">
+                    📌 + Pop-it (Nota)
                 </button>
 
                 <div class="search-box">
                     <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    <input type="text" id="searchInput" placeholder="Buscar concepto o unidad (ej: g/dL, VCM, Bazo)..." onkeyup="filterNotes()">
+                    <input type="text" id="searchInput" placeholder="Buscar concepto o sigla..." onkeyup="filterNotes()">
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Modal Glosario de Unidades -->
-    <div class="modal-overlay" id="glossaryModal">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3>📖 Diccionario Rápido de Unidades y Siglas</h3>
-                <button class="close-btn" onclick="toggleGlossaryModal()">&times;</button>
+        <!-- PESTAÑAS DE NAVEGACIÓN -->
+        <nav class="nav-scroller">
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchSection('sec-bases')">1. Hematopoyesis</button>
+                <button class="tab-btn" onclick="switchSection('sec-anemia')">2. Síndrome Anémico</button>
+                <button class="tab-btn" onclick="switchSection('sec-tipos')">3. Tipos de Anemia</button>
+                <button class="tab-btn" onclick="switchSection('sec-transfusion')">4. Transfusión</button>
+                <button class="tab-btn" onclick="switchSection('sec-hemostasia')">5. Coagulación</button>
+                <button class="tab-btn" onclick="switchSection('sec-trastornos')">6. Trastornos</button>
+                <button class="tab-btn" onclick="switchSection('sec-ayudamemorias')">Ayudamemorias</button>
+                <button class="tab-btn" onclick="switchSection('sec-quiz')">Examen de Práctica</button>
+                <button class="tab-btn" onclick="switchSection('sec-videos')">Videos</button>
             </div>
-            <div class="tech-box">
-                <ul style="line-height: 1.7;">
-                    <li><strong style="color: var(--fluor-yellow);">g/dL (Gramos por decilitro):</strong> Masa en gramos de hemoglobina presente en 100 mL de sangre. Indica la concentración total de hemoglobina.</li>
-                    <li><strong style="color: var(--fluor-pink);">fl (Femtolitros):</strong> Unidad de volumen ($10^{-15}$ L). Mide el <strong>tamaño de un solo glóbulo rojo</strong> (VCM).</li>
-                    <li><strong style="color: var(--fluor-cyan);">pg (Picogramos):</strong> Unidad de peso ($10^{-12}$ g). Mide el <strong>peso de la hemoglobina dentro de un eritrocito</strong> (HCM).</li>
-                    <li><strong style="color: var(--fluor-green);">VCM:</strong> Volumen Corpuscular Medio (Tamaño eritrocitario promedio; normal: 80-100 fl).</li>
-                    <li><strong style="color: var(--fluor-yellow);">HCM:</strong> Hemoglobina Corpuscular Media (Peso de la Hb por célula; normal: 27-33 pg).</li>
-                    <li><strong style="color: var(--fluor-pink);">CHCM:</strong> Concentración de Hemoglobina Corpuscular Media (Densidad de la Hb en una masa de glóbulos rojos; normal: 32-36 g/dL).</li>
-                    <li><strong style="color: var(--fluor-cyan);">Hb:</strong> Hemoglobina (Proteína transportadora de oxígeno dentro de los hematíes).</li>
-                    <li><strong style="color: var(--fluor-green);">FVW:</strong> Factor von Willebrand (Proteína endotelial que actúa como adhesivo para las plaquetas).</li>
-                    <li><strong style="color: var(--fluor-yellow);">t-PA:</strong> Activador Tisular del Plasminógeno (Enzima que activa la disolución del coágulo).</li>
-                    <li><strong style="color: var(--fluor-pink);">G (Gauge):</strong> Calibre interno de catéteres/agujas. A menor número G, más gruesa es la aguja (18G es más gruesa que 20G).</li>
-                </ul>
-            </div>
-        </div>
+        </nav>
     </div>
 
-    <!-- Pestañas de Cuadernola -->
-    <nav class="nav-scroller">
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchSection('sec-bases')">1. Hematopoyesis</button>
-            <button class="tab-btn" onclick="switchSection('sec-anemia')">2. Síndrome Anémico</button>
-            <button class="tab-btn" onclick="switchSection('sec-tipos')">3. Tipos de Anemia</button>
-            <button class="tab-btn" onclick="switchSection('sec-transfusion')">4. Transfusión</button>
-            <button class="tab-btn" onclick="switchSection('sec-hemostasia')">5. Coagulación</button>
-            <button class="tab-btn" onclick="switchSection('sec-trastornos')">6. Trastornos</button>
-            <button class="tab-btn" onclick="switchSection('sec-ayudamemorias')">Ayudamemorias</button>
-            <button class="tab-btn" onclick="switchSection('sec-quiz')">Examen</button>
-            <button class="tab-btn" onclick="switchSection('sec-videos')">Videos</button>
-        </div>
-    </nav>
+    <!-- ESTRUCTURA PRINCIPAL CON GLOSARIO A MANO IZQUIERDA -->
+    <div class="app-body-container">
 
-    <!-- Contenido Principal -->
-    <main class="main-wrapper">
-
-        <!-- SECCIÓN 1: HEMATOPOYESIS -->
-        <section id="sec-bases" class="tab-content active">
-            <div class="section-header">
-                <h2>1. Bases Anatómicas del Sistema Hematopoyético</h2>
-                <p>Pasa el dedo o mouse sobre las unidades amarillas marcadas para ver su significado.</p>
+        <!-- GLOSARIO PERMANENTE A MANO IZQUIERDA -->
+        <aside class="left-sidebar-glossary">
+            <div class="glossary-title">
+                📖 GLOSARIO A MANO IZQUIERDA
             </div>
-
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Médula Ósea</span>
-                    <h3>Fábrica Hematopoyética</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Ubicada dentro de huesos planos y cortos (<span class="hl-y">esternón, costillas, vértebras, pelvis</span>).</li>
-                            <li><span class="hl-p">Médula Roja:</span> Activa en producción celular (sensible a quimioterapia y radiación).</li>
-                            <li><span class="hl-y">Médula Amarilla:</span> Inactiva, rica en tejido adiposo.</li>
-                            <li>Lugar de maduración de los <span class="hl-g">Linfocitos B</span>.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es la <span class="hl-y">fábrica principal de la ciudad</span>. La médula roja es la planta trabajando a pleno produciendo autos (células de la sangre). La amarilla es el depósito de al lado con galpones juntando grasa. Si la fábrica pierde la luz (quimio/radiación), la ciudad se queda sin autos nuevos.</div>
-                    </div>
+            <div class="glossary-list">
+                <div class="glossary-item">
+                    <div class="glossary-term">g/dL (Gramos por decilitro)</div>
+                    <div class="glossary-desc">Masa de Hemoglobina en 100 mL de sangre. Unidad estándar OMS.</div>
                 </div>
 
-                <div class="note-card searchable">
-                    <span class="card-badge badge-c">Líneas Celulares</span>
-                    <h3>Células Madre Pluripotenciales</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Células autorrenovables en médula ósea.</li>
-                            <li><span class="hl-c">Línea Mieloide:</span> Inmunidad innata, fagocitosis, inflamación. Da origen a eritrocitos, plaquetas y granulocitos.</li>
-                            <li><span class="hl-p">Línea Linfoide:</span> Inmunidad adaptativa. Linfocitos B (anticuerpos) y Linfocitos T (maduran en el Timo).</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es como la <span class="hl-c">materia prima o plastilina universal</span>. De ahí salen dos fuerzas de seguridad: la <em>Policía de Calle (Mieloide)</em> que limpia la mugre del día a día, y los <em>Agentes de Inteligencia (Linfoide)</em> que arman misiles teledirigidos para criminales específicos.</div>
-                    </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">fl (Femtolitros)</div>
+                    <div class="glossary-desc">Unidad de volumen ($10^{-15}$ L). Mide el <strong>tamaño de 1 eritrocito</strong> (VCM).</div>
                 </div>
 
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Filtro Sanguíneo</span>
-                    <h3>El Bazo (Pulpa Roja y Blanca)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-p">Pulpa Roja:</span> Destruye eritrocitos viejos o deteriorados y almacena plaquetas/granulocitos.</li>
-                            <li><span class="hl-g">Pulpa Blanca:</span> Tejido linfoide que filtra la sangre y genera respuesta inmune frente a antígenos circulantes.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es una <span class="hl-y">mezcla entre desguace de autos viejos y aduana de peaje</span>. La pulpa roja desarma los autos oxidados (glóbulos rojos aplastados tras 120 días). La pulpa blanca es el control policial del peaje que revisa los baúles buscando ladrones (bacterias).</div>
-                    </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">pg (Picogramos)</div>
+                    <div class="glossary-desc">Unidad de peso ($10^{-12}$ g). Mide el <strong>peso de Hb en 1 eritrocito</strong> (HCM).</div>
                 </div>
 
-                <div class="note-card searchable">
-                    <span class="card-badge badge-g">Protección Mucosa</span>
-                    <h3>MALT e Inmunoglobulina IgA</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Tejido linfoide en mucosas de aparato digestivo, bronquial, genitourinario, amígdalas y apéndice.</li>
-                            <li>Produce principalmente <span class="hl-g">IgA secretora</span> que atraviesa la mucosa y bloquea la entrada de patógenos.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es como poner <span class="hl-g">patovicas en la puerta del boliche</span>. La IgA es el patovica parado en la puerta (boca, pulmón o intestino) que ni siquiera deja que los gérmenes apoyen el pie adentro del local.</div>
-                    </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Hb (Hemoglobina)</div>
+                    <div class="glossary-desc">Proteína con hierro que transporta el oxígeno en la sangre.</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">VCM (Volumen Corpuscular Medio)</div>
+                    <div class="glossary-desc">Tamaño promedio del eritrocito (Normal: 80-100 fl).</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">HCM (Hemoglobina Corpuscular Media)</div>
+                    <div class="glossary-desc">Peso medio de hemoglobina por glóbulo rojo (Normal: 27-33 pg).</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">CHCM (Conc. de Hb Corp. Media)</div>
+                    <div class="glossary-desc">Densidad de hemoglobina eritrocitaria (Normal: 32-36 g/dL).</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">FVW (Factor von Willebrand)</div>
+                    <div class="glossary-desc">Proteína endotelial adhesiva para plaquetas.</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">t-PA (Activador Tisular Plasminógeno)</div>
+                    <div class="glossary-desc">Enzima endotelial que activa la disolución del coágulo.</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">MALT</div>
+                    <div class="glossary-desc">Tejido Linfoide Asociado a Mucosas.</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">IgA (Inmunoglobulina A)</div>
+                    <div class="glossary-desc">Anticuerpo de barrera secretado en mucosas.</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">G (Gauge)</div>
+                    <div class="glossary-desc">Calibre de aguja (18G es más gruesa que 20G).</div>
+                </div>
+
+                <div class="glossary-item">
+                    <div class="glossary-term">µm (Micrómetros)</div>
+                    <div class="glossary-desc">Tamaño de poros del filtro transfusional (170-260 µm).</div>
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <!-- SECCIÓN 2: SÍNDROME ANÉMICO -->
-        <section id="sec-anemia" class="tab-content">
-            <div class="section-header">
-                <h2>2. Síndrome Anémico y Criterios Diagnósticos</h2>
-                <p>Toca o pasa el mouse sobre las unidades (<span class="unit-def" data-def="g/dL = Gramos por decilitro. Mide la masa de Hemoglobina en 100 mL de sangre.">g/dL</span>, <span class="unit-def" data-def="fl = Femtolitros (10^-15 L). Mide el tamaño o volumen de 1 glóbulo rojo.">fl</span>, <span class="unit-def" data-def="pg = Picogramos (10^-12 g). Mide el peso de hemoglobina dentro de 1 glóbulo rojo.">pg</span>) para ver su definición exacta.</p>
-            </div>
+        <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+        <main class="main-wrapper">
 
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Umbrales OMS</span>
-                    <h3>Criterios Diagnósticos de Anemia</h3>
-                    <div class="tech-box">
-                        <p>Descenso de <span class="unit-def" data-def="Hb = Hemoglobina. Proteína que transporta el oxígeno en la sangre.">Hb</span> y Hematocrito según grupo:</p>
-                        <table class="custom-table">
-                            <thead>
-                                <tr><th>Población</th><th>Límite OMS (<span class="unit-def" data-def="Hb = Hemoglobina">Hb</span>) en <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Hombres adultos</td><td><span class="hl-p">&lt; 13 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
-                                <tr><td>Mujeres no embarazadas</td><td><span class="hl-y">&lt; 12 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
-                                <tr><td>Mujeres embarazadas</td><td><span class="hl-g">&lt; 11 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre (Masa de Hb por cada 100 mL)">g/dL</span></span></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">La Hemoglobina son los <span class="hl-y">camiones de flete que reparten tubos de oxígeno</span>. Si tenés menos camiones que los del límite (regla 13-12-11), toda la ciudad empieza a andar despacio y con frío porque les falta aire a las calderas.</div>
-                    </div>
+            <!-- SECCIÓN 1: HEMATOPOYESIS -->
+            <section id="sec-bases" class="tab-content active">
+                <div class="section-header">
+                    <h2>1. Bases Anatómicas del Sistema Hematopoyético</h2>
+                    <p>Ubicación de médula ósea, origen celular y funciones del sistema linfático.</p>
                 </div>
 
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Clasificación Medular</span>
-                    <h3>Arregenerativas vs Regenerativas</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-p">Arregenerativas:</span> Producción insuficiente en médula (falta de insumos o aplasia).</li>
-                            <li><span class="hl-g">Regenerativas:</span> Médula sana que produce al máximo, pero hay pérdida sanguínea o hemólisis activa.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">En la <strong>Arregenerativa</strong>, la fábrica quebró o se quedó sin insumos. En la <strong>Regenerativa</strong>, la fábrica saca camiones al 200%, pero hay un loco afuera pinchándoles las ruedas o un zanjón por donde se caen.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-c">Índices Eritrocitarios</span>
-                    <h3>VCM (Tamaño) y HCM (Color)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="unit-def" data-def="VCM = Volumen Corpuscular Medio. Mide el tamaño medio del glóbulo rojo en femtolitros (fl).">VCM</span>: Normocítica (80-100 <span class="unit-def" data-def="fl = Femtolitros. Unidad de volumen para medir el tamaño de 1 hematíe.">fl</span>), Microcítica (&lt;80 <span class="unit-def" data-def="fl = Femtolitros">fl</span>), Macrocítica (&gt;100 <span class="unit-def" data-def="fl = Femtolitros">fl</span>).</li>
-                            <li><span class="unit-def" data-def="HCM = Hemoglobina Corpuscular Media. Mide el peso de Hb dentro de cada glóbulo en picogramos (pg).">HCM</span>: Hipocrómica (&lt;29 <span class="unit-def" data-def="pg = Picogramos. Unidad de peso para la Hb por glóbulo rojo.">pg</span>).</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">El VCM te dice <span class="hl-c">el tamaño del camioneto</span> (motito enana, camión normal o colectivo doble piso). El HCM te dice <span class="hl-y">qué tan pintado de rojo brillante está</span> (si viene cargado de pintura/oxígeno o pálido).</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-g">Grados de Severidad</span>
-                    <h3>Clasificación Clínica por Hb</h3>
-                    <div class="tech-box">
-                        <table class="custom-table">
-                            <thead>
-                                <tr><th>Grado</th><th>Nivel de <span class="unit-def" data-def="Hb = Hemoglobina">Hb</span></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Anemia Leve</td><td><span class="hl-g"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> &gt; 10 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
-                                <tr><td>Anemia Moderada</td><td><span class="hl-y"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> 8 a 10 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
-                                <tr><td>Anemia Grave</td><td><span class="hl-p"><span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> &lt; 8 <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></span></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">En la <strong>Leve</strong> te agitas un poco en la escalera. En la <strong>Moderada</strong> te late fuerte el corazón al caminar. En la <strong>Grave (&lt;8)</strong> es una emergencia total por falta de aire en los órganos.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 3: TIPOS DE ANEMIA -->
-        <section id="sec-tipos" class="tab-content">
-            <div class="section-header">
-                <h2>3. Tipos Específicos de Anemia</h2>
-                <p>Valores técnicos: <span class="unit-def" data-def="fl = Femtolitros (tamaño eritrocitario)">fl</span>, <span class="unit-def" data-def="pg = Picogramos (peso de Hb en el eritrocito)">pg</span>, <span class="unit-def" data-def="CHCM = Concentración de Hemoglobina Corpuscular Media en g/dL">CHCM</span>.</p>
-            </div>
-
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Déficit de Hierro</span>
-                    <h3>Anemia Ferropénica</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Disminución de <span class="unit-def" data-def="Hb = Hemoglobina">Hb</span> por agotamiento de reservas de hierro.</li>
-                            <li><span class="hl-y">Laboratorio:</span> Microcítica (<span class="unit-def" data-def="VCM = Tamaño del eritrocito">VCM</span> &lt; 80 <span class="unit-def" data-def="fl = Femtolitros">fl</span>) e Hipocrómica (<span class="unit-def" data-def="HCM = Peso de Hb en la célula">HCM</span> &lt; 29 <span class="unit-def" data-def="pg = Picogramos">pg</span>, <span class="unit-def" data-def="CHCM = Densidad de Hb en los glóbulos">CHCM</span> &lt; 32 <span class="unit-def" data-def="g/dL = Gramos por decilitro">g/dL</span>).</li>
-                            <li>Causada por pérdidas crónicas o aumento de requerimientos.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es como armar los camiones de flete pero <span class="hl-y">se te acabó la chapa de hierro</span>. La fábrica empieza a sacar <em>autitos enanos (microcíticos) y pálidos (hipocrómicos)</em> que apenas llevan oxígeno.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Falla en ADN</span>
-                    <h3>Anemia Megaloblástica (B12 / Folato / Omeprazol)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Falla en síntesis de ADN con ARN normal -&gt; <span class="hl-p">Macrocítica (<span class="unit-def" data-def="VCM = Tamaño eritrocitario">VCM</span> &gt; 100 <span class="unit-def" data-def="fl = Femtolitros">fl</span>)</span>.</li>
-                            <li>Causada por falta de B12/B9, vegetarismo estricto, atrofia gástrica (sin Factor Intrínseco) y fármacos (<span class="hl-y">Omeprazol, Metformina</span>).</li>
-                            <li><span class="hl-p">Síntomas:</span> Piel amarillenta, ictericia leve y <strong>Glositis Atrófica</strong> (lengua depapilada roja). Neurológicos solo en B12.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es como sacar fotocopias pero <span class="hl-p">la máquina no tiene tinta de ADN (falta B12/Fólico)</span>. La célula se infla como un colectivo gigante torpe (macrocítica) incapaz de dividirse. El Omeprazol le pone candado a la aduana del estómago que absorbe la B12. La lengua queda lisa como frutilla pelada (glositis).</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-g">Destrucción Celular</span>
-                    <h3>Anemia Hemolítica</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Destrucción prematura de glóbulos rojos.</li>
-                            <li><span class="hl-g">Tríada Clínica:</span> Palidez, Ictericia (bilirrubina alta) y Esplenomegalia/Hepatomegalia (agrandamiento por trabajo excesivo).</li>
-                            <li>Puede ser Falciforme (eritrocitos en hoz) o Autoinmune.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Es como si <span class="hl-g">alguien estuviera reventando las ruedas de los camiones en la calle</span>. Como se rompen tantos camiones juntos, el desguace (bazo) se infla de tanto laburar (esplenomegalia) y el aceite volcado de los camiones te tiñe la piel de amarillo (ictericia).</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-c">Deformidad Ósea</span>
-                    <h3>Talasemia y "Cráneo en Cepillo"</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Trastorno genético hereditario de síntesis de globina.</li>
-                            <li>La anemia severa provoca <span class="hl-c">hiperplasia medular expansiva</span> en huesos del cráneo.</li>
-                            <li><span class="hl-p">Signo Radiológico:</span> <strong>"Cráneo en Cepillo"</strong> (estrías verticales en radiografía).</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Como faltan camiones por falla genética, la fábrica del hueso entra en pánico y <span class="hl-c">rompe las paredes del galpón para agrandarse</span>. Al empujar las paredes del cráneo hacia afuera, en la radiografía se ven los pelos parados igual que las cerdas de un cepillo de dientes.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 4: TRANSFUSIÓN -->
-        <section id="sec-transfusion" class="tab-content">
-            <div class="section-header">
-                <h2>4. Terapia Transfusional y Enfermería</h2>
-                <p>Materiales: Catéter <span class="unit-def" data-def="G = Gauge. Calibre interno de la aguja. A menor número, más gruesa es la aguja (18G es más gruesa que 20G).">18G-20G</span> y Filtro <span class="unit-def" data-def="µm = Micrómetros (10^-6 metros). Tamaño de poro del filtro transfusional.">170-260 µm</span>.</p>
-            </div>
-
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Origen Físico vs Industrial</span>
-                    <h3>Hemocomponentes vs Hemoderivados</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-p">Hemocomponentes (Centrifugación física):</span> Concentrado de Eritrocitos, Plasma, Plaquetas, Crioprecipitados.</li>
-                            <li><span class="hl-y">Hemoderivados (Fraccionamiento industrial de plasma):</span> Albúmina, Factores de Coagulación (VIII, IX, X), Antitrombina III.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Los <strong>Hemocomponentes</strong> son como separar la leche en la granja: girás la centrífuga y sacás la crema (plasma), la leche (glóbulos) y la nata (plaquetas). Los <strong>Hemoderivados</strong> son productos de laboratorio farmacéutico industrial (proteína en polvo pura o frasquito de factor).</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Protocolo 4P</span>
-                    <h3>Lista de Chequeo de Enfermería (4 Puntos)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-p">1. Paciente Correcto:</span> Doble identificación de receptor.</li>
-                            <li><span class="hl-y">2. Volumen Correcto:</span> Según indicación médica.</li>
-                            <li><span class="hl-g">3. Hemocomponente Correcto:</span> Grupo, Rh y compatibilidad.</li>
-                            <li><span class="hl-c">4. Vía / Vigilancia Correcta:</span> Permeabilidad (usar catéter <span class="unit-def" data-def="G = Gauge. Calibre de aguja (18G o 20G).">18G-20G</span> con filtro de <span class="unit-def" data-def="µm = Micrómetros (filtro de microagregados)">170-260 µm</span>).</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Transfundir es como <span class="hl-y">recibir un paquete de órgano vital por correo express</span>. Tenés que mirar 4 veces la etiqueta de la caja: que el destinatario sea exactamente el de la cama, la bolsa no esté dañada ni sea de otro grupo, y la manguera esté firme.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-g">Tiempo Límite</span>
-                    <h3>Regla de las 4 Horas Transfusionales</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>La infusión de un concentrado de eritrocitos jamás debe superar las <span class="hl-p">4 horas</span> desde su salida de banco de sangre.</li>
-                            <li>Previene la proliferación bacteriana a temperatura ambiente y la hemólisis del producto.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">La sangre fuera de la heladera del banco de sangre es como <span class="hl-g">un sachet de leche abierto al sol en verano</span>. Pasadas las 4 horas se llena de bacterias y las células se pudren. Si no bajó en 4 horas, se descarta.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 5: COAGULACIÓN -->
-        <section id="sec-hemostasia" class="tab-content">
-            <div class="section-header">
-                <h2>5. Fisiología de la Coagulación e Hemostasia</h2>
-                <p>Factores: <span class="unit-def" data-def="FVW = Factor von Willebrand (adhesivo plaquetario)">FVW</span>, <span class="unit-def" data-def="t-PA = Activador Tisular del Plasminógeno">t-PA</span>.</p>
-            </div>
-
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-c">Paso 1: Parche Rápido</span>
-                    <h3>Hemostasia Primaria (Vascular y Plaquetaria)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Vasoconstricción local (<span class="hl-c">Serotonina, Endotelina, TxA2</span>; caída de ON y PGI2).</li>
-                            <li>Adhesión plaquetaria al colágeno expuesto mediante el receptor <span class="hl-p">GP Ib</span> y el <span class="unit-def" data-def="FVW = Factor von Willebrand. Pegamento biológico endotelial.">FVW</span>.</li>
-                            <li>Formación del tapón hemostático primario temporal.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Se reventó una manguera en la pared. Lo primero que hacés es <span class="hl-c">apretar el caño para que salga menos agua (vasoconstricción)</span> y ponés una <span class="hl-p">cinta adhesiva provisoria (plaquetas con el pegamento FVW)</span> para tapar el hueco rápido.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Paso 2: Hormigón Armado</span>
-                    <h3>Hemostasia Secundaria (Trombina y Fibrina)</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Cascada enzimática que convierte la protrombina en <span class="hl-p">Trombina</span>.</li>
-                            <li>La Trombina transforma el <span class="hl-y">Fibrinógeno</span> soluble en una malla de <span class="hl-g">Fibrina</span> insoluble.</li>
-                            <li>Consolida el coágulo hemostático definitivo.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">La cinta adhesiva provisoria no aguanta la presión del agua por mucho tiempo. Así que viene el albañil y <span class="hl-p">le tira cemento con una malla de alambre tejida (red de fibrina)</span> sobre la cinta. Ahora sí quedó una pared de hormigón armado fija.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Factores de Coagulación</span>
-                    <h3>Regla Vitamina K (1972) y Excepción del FVW</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li>Todos los factores se sintetizan en el hígado EXCEPTUANDO el <span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span> (producido por endotelio y megacariocitos).</li>
-                            <li>Factores dependientes de Vitamina K: <span class="hl-p">Factores II, VII, IX y X</span>.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">La Vitamina K son las <span class="hl-y">pilas alcalinas que necesitan 4 herramientas específicas (10, 9, 7 y 2 -&gt; 1972)</span> para encenderse. El Factor von Willebrand es la única herramienta que no se hace en la fábrica central (hígado), sino en los talleres del caño (endotelio).</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-g">Limpieza del Coágulo</span>
-                    <h3>Anticoagulantes Naturales y Plasmina</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-g">Antitrombina III:</span> Inactiva Trombina y Factor Xa.</li>
-                            <li><span class="hl-c">Proteína C / S:</span> Inactiva factores Va y VIIIa.</li>
-                            <li><span class="hl-p">Fibrinólisis (<span class="unit-def" data-def="t-PA = Activador Tisular del Plasminógeno">t-PA</span> y Plasmina):</span> La plasmina degrada la fibrina tras la cicatrización.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">Son los <span class="hl-g">inspectores de obra y la cuadrilla de limpieza</span>. Si el albañil tira cemento sin control, te tapona el caño por dentro (trombosis). Los inspectores frenan al albañil y la Plasmina viene con el martillo neumático a sacar el cemento sobrante.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 6: TRASTORNOS -->
-        <section id="sec-trastornos" class="tab-content">
-            <div class="section-header">
-                <h2>6. Trastornos Hemorrágicos y Trombóticos</h2>
-                <p>Hemofilias A y B, enfermedad de von Willebrand (<span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span>) y trombofilias.</p>
-            </div>
-
-            <div class="cards-grid">
-                <div class="note-card searchable">
-                    <span class="card-badge badge-p">Hemorragias</span>
-                    <h3>Hemofilia A (VIII), Hemofilia B (IX) y vWD</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-p">Hemofilia A:</span> Déficit del Factor VIII.</li>
-                            <li><span class="hl-y">Hemofilia B:</span> Déficit del Factor IX.</li>
-                            <li><span class="hl-g">Enfermedad de von Willebrand:</span> Alteración en la adhesión plaquetaria y transporte del FVIII por falla de <span class="unit-def" data-def="FVW = Factor von Willebrand">FVW</span>.</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">En las hemofilias <span class="hl-p">te falta una pieza clave de la máquina de hacer cemento (pieza 8 en la A, pieza 9 en la B)</span>. Por más cinta adhesiva que pongas, el cemento nunca se endurece y no para de sangrar.</div>
-                    </div>
-                </div>
-
-                <div class="note-card searchable">
-                    <span class="card-badge badge-y">Hipercoagulabilidad</span>
-                    <h3>Trombofilias y Factor V Leiden</h3>
-                    <div class="tech-box">
-                        <ul>
-                            <li><span class="hl-y">Factor V Leiden:</span> Mutación que vuelve al Factor V resistente a la inactivación por Proteína C.</li>
-                            <li>Deficiencia de Antitrombina III o Proteína C/S.</li>
-                            <li>Síndrome Antifosfolípido (autoinmune, trombosis + pérdidas gestacionales).</li>
-                        </ul>
-                    </div>
-                    <div class="human-box">
-                        <div class="human-header">✎ En criollo:</div>
-                        <div class="human-text">En el Factor V Leiden, a la hormigonera de cemento <span class="hl-y">se le rompió la palanca de apagado</span>. Los inspectores gritan que pare, pero la máquina sigue volcando cemento hasta que te tapona una vena entera.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN AYUDAMEMORIAS -->
-        <section id="sec-ayudamemorias" class="tab-content">
-            <div class="section-header">
-                <h2>Ayudamemorias Clínicos (Flashcards)</h2>
-                <p>Toca cada tarjeta para darla vuelta y repasar antes del examen.</p>
-            </div>
-
-            <div class="flashcards-container">
-                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-inner">
-                        <div class="fc-front">
-                            <div>
-                                <span class="card-badge badge-y">Factores K-Dependientes</span>
-                                <h3>¿Cuáles factores necesitan Vitamina K?</h3>
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
-                            </div>
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Médula Ósea</span>
+                        <h3>Fábrica Hematopoyética</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Ubicada dentro de huesos planos y cortos (<span class="hl-y">esternón, costillas, vértebras, pelvis</span>).</li>
+                                <li><span class="hl-p">Médula Roja:</span> Activa en producción celular (sensible a quimioterapia y radiación).</li>
+                                <li><span class="hl-y">Médula Amarilla:</span> Inactiva, rica en tejido adiposo.</li>
+                                <li>Lugar de maduración de los <span class="hl-g">Linfocitos B</span>.</li>
+                            </ul>
                         </div>
-                        <div class="fc-back">
-                            <div>
-                                <h3>Regla del Año "1972"</h3>
-                                <div class="fc-tag">Factores: 10 (X), 9 (IX), 7 (VII), 2 (II)</div>
-                                <p style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.5rem;">✎ En criollo: Las 4 herramientas que necesitan pilas alcalinas (Vit-K) para encender.</p>
-                            </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es la <span class="hl-y">fábrica principal de la ciudad</span>. La médula roja es la planta trabajando a pleno produciendo autos (células de la sangre). La amarilla es el depósito de al lado con galpones juntando grasa. Si la fábrica pierde la luz (quimio/radiación), la ciudad se queda sin autos nuevos.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-c">Líneas Celulares</span>
+                        <h3>Células Madre Pluripotenciales</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Células autorrenovables en médula ósea.</li>
+                                <li><span class="hl-c">Línea Mieloide:</span> Inmunidad innata, fagocitosis, inflamación. Da origen a eritrocitos, plaquetas y granulocitos.</li>
+                                <li><span class="hl-p">Línea Linfoide:</span> Inmunidad adaptativa. Linfocitos B (anticuerpos) y Linfocitos T (maduran en el Timo).</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es como la <span class="hl-c">materia prima o plastilina universal</span>. De ahí salen dos fuerzas de seguridad: la <em>Policía de Calle (Mieloide)</em> que limpia la mugre del día a día, y los <em>Agentes de Inteligencia (Linfoide)</em> que arman misiles teledirigidos para criminales específicos.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Filtro Sanguíneo</span>
+                        <h3>El Bazo (Pulpa Roja y Blanca)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-p">Pulpa Roja:</span> Destruye eritrocitos viejos o deteriorados y almacena plaquetas/granulocitos.</li>
+                                <li><span class="hl-g">Pulpa Blanca:</span> Tejido linfoide que filtra la sangre y genera respuesta inmune frente a antígenos circulantes.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es una <span class="hl-y">mezcla entre desguace de autos viejos y aduana de peaje</span>. La pulpa roja desarma los autos oxidados (glóbulos rojos aplastados tras 120 días). La pulpa blanca es el control policial del peaje que revisa los baúles buscando ladrones (bacterias).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-g">Protección Mucosa</span>
+                        <h3>MALT e Inmunoglobulina IgA</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Tejido linfoide en mucosas de aparato digestivo, bronquial, genitourinario, amígdalas y apéndice.</li>
+                                <li>Produce principalmente <span class="hl-g">IgA secretora</span> que atraviesa la mucosa y bloquea la entrada de patógenos.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es como poner <span class="hl-g">patovicas en la puerta del boliche</span>. La IgA es el patovica parado en la puerta (boca, pulmón o intestino) que ni siquiera deja que los gérmenes apoyen el pie adentro del local.</div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-inner">
-                        <div class="fc-front">
-                            <div>
-                                <span class="card-badge badge-p">Hemofilias A y B</span>
-                                <h3>¿Qué factor falta en Hemofilia A y B?</h3>
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
+            <!-- SECCIÓN 2: SÍNDROME ANÉMICO -->
+            <section id="sec-anemia" class="tab-content">
+                <div class="section-header">
+                    <h2>2. Síndrome Anémico y Criterios Diagnósticos</h2>
+                    <p>Consultá las definiciones de Hb, g/dL y VCM en el glosario de la izquierda.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Umbrales OMS</span>
+                        <h3>Criterios Diagnósticos de Anemia</h3>
+                        <div class="tech-box">
+                            <p>Descenso de Hb y Hematocrito según grupo:</p>
+                            <table class="custom-table">
+                                <thead>
+                                    <tr><th>Población</th><th>Límite OMS (Hb)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Hombres adultos</td><td><span class="hl-p">&lt; 13 g/dL</span></td></tr>
+                                    <tr><td>Mujeres no embarazadas</td><td><span class="hl-y">&lt; 12 g/dL</span></td></tr>
+                                    <tr><td>Mujeres embarazadas</td><td><span class="hl-g">&lt; 11 g/dL</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">La Hemoglobina son los <span class="hl-y">camiones de flete que reparten tubos de oxígeno</span>. Si tenés menos camiones que los del límite (regla 13-12-11), toda la ciudad empieza a andar despacio y con frío porque les falta aire a las calderas.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Clasificación Medular</span>
+                        <h3>Arregenerativas vs Regenerativas</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-p">Arregenerativas:</span> Producción insuficiente en médula (falta de insumos o aplasia).</li>
+                                <li><span class="hl-g">Regenerativas:</span> Médula sana que produce al máximo, pero hay pérdida sanguínea o hemólisis activa.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">En la <strong>Arregenerativa</strong>, la fábrica quebró o se quedó sin insumos. En la <strong>Regenerativa</strong>, la fábrica saca camiones al 200%, pero hay un loco afuera pinchándoles las ruedas o un zanjón por donde se caen.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-c">Índices Eritrocitarios</span>
+                        <h3>VCM (Tamaño) y HCM (Color)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-c">VCM:</span> Normocítica (80-100 fl), Microcítica (&lt;80 fl), Macrocítica (&gt;100 fl).</li>
+                                <li><span class="hl-y">HCM:</span> Hipocrómica (&lt;29 pg).</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">El VCM te dice <span class="hl-c">el tamaño del camioneto</span> (motito enana, camión normal o colectivo doble piso). El HCM te dice <span class="hl-y">qué tan pintado de rojo brillante está</span> (si viene cargado de pintura/oxígeno o pálido).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-g">Grados de Severidad</span>
+                        <h3>Clasificación Clínica por Hb</h3>
+                        <div class="tech-box">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr><th>Grado</th><th>Nivel de Hb</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Anemia Leve</td><td><span class="hl-g">Hb &gt; 10 g/dL</span></td></tr>
+                                    <tr><td>Anemia Moderada</td><td><span class="hl-y">Hb 8 a 10 g/dL</span></td></tr>
+                                    <tr><td>Anemia Grave</td><td><span class="hl-p">Hb &lt; 8 g/dL</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">En la <strong>Leve</strong> te agitas un poco en la escalera. En la <strong>Moderada</strong> te late fuerte el corazón al caminar. En la <strong>Grave (&lt;8)</strong> es una emergencia total por falta de aire en los órganos.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: TIPOS DE ANEMIA -->
+            <section id="sec-tipos" class="tab-content">
+                <div class="section-header">
+                    <h2>3. Tipos Específicos de Anemia</h2>
+                    <p>Laboratorio: fl, pg, CHCM.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Déficit de Hierro</span>
+                        <h3>Anemia Ferropénica</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Disminución de Hb por falta de hierro.</li>
+                                <li><span class="hl-y">Laboratorio:</span> Microcítica (VCM &lt; 80 fl) e Hipocrómica (HCM &lt; 29 pg, CHCM &lt; 32 g/dL).</li>
+                                <li>Causada por pérdidas crónicas o embarazo.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es como armar los camiones de flete pero <span class="hl-y">se te acabó la chapa de hierro</span>. La fábrica empieza a sacar <em>autitos enanos (microcíticos) y pálidos (hipocrómicos)</em> que apenas llevan oxígeno.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Falla en ADN</span>
+                        <h3>Anemia Megaloblástica (B12 / Folato / Omeprazol)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Falla en síntesis de ADN -&gt; <span class="hl-p">Macrocítica (VCM &gt; 100 fl)</span>.</li>
+                                <li>Causada por falta de B12/B9, atrofia gástrica o fármacos (<span class="hl-y">Omeprazol, Metformina</span>).</li>
+                                <li><span class="hl-p">Síntomas:</span> Piel amarillenta, ictericia leve y <strong>Glositis Atrófica</strong> (lengua roja depapilada).</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es como sacar fotocopias pero <span class="hl-p">la máquina no tiene tinta de ADN (falta B12/Fólico)</span>. La célula se infla como un colectivo gigante torpe (macrocítica) incapaz de dividirse. El Omeprazol le pone candado a la aduana del estómago que absorbe la B12. La lengua queda lisa como frutilla pelada (glositis).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-g">Destrucción Celular</span>
+                        <h3>Anemia Hemolítica</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Destrucción prematura de glóbulos rojos.</li>
+                                <li><span class="hl-g">Tríada Clínica:</span> Palidez, Ictericia y Esplenomegalia/Hepatomegalia.</li>
+                                <li>Puede ser Falciforme o Autoinmune.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Es como si <span class="hl-g">alguien estuviera reventando las ruedas de los camiones en la calle</span>. Como se rompen tantos camiones juntos, el desguace (bazo) se infla de tanto laburar (esplenomegalia) y el aceite volcado de los camiones te tiñe la piel de amarillo (ictericia).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-c">Deformidad Ósea</span>
+                        <h3>Talasemia y "Cráneo en Cepillo"</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Trastorno genético de síntesis de globina.</li>
+                                <li>Anemia severa provoca <span class="hl-c">hiperplasia medular expansiva</span> en huesos del cráneo.</li>
+                                <li><span class="hl-p">Signo Radiológico:</span> <strong>"Cráneo en Cepillo"</strong>.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Como faltan camiones por falla genética, la fábrica del hueso entra en pánico y <span class="hl-c">rompe las paredes del galpón para agrandarse</span>. Al empujar las paredes del cráneo hacia afuera, en la radiografía se ven los pelos parados igual que las cerdas de un cepillo de dientes.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: TRANSFUSIÓN -->
+            <section id="sec-transfusion" class="tab-content">
+                <div class="section-header">
+                    <h2>4. Terapia Transfusional y Enfermería</h2>
+                    <p>Calibre catéter: 18G-20G | Filtro: 170-260 µm.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Origen Físico vs Industrial</span>
+                        <h3>Hemocomponentes vs Hemoderivados</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-p">Hemocomponentes (Centrifugación):</span> Concentrado de Eritrocitos, Plasma, Plaquetas, Crioprecipitados.</li>
+                                <li><span class="hl-y">Hemoderivados (Industrial):</span> Albúmina, Factores de Coagulación (VIII, IX, X), Antitrombina III.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Los <strong>Hemocomponentes</strong> son como separar la leche en la granja: girás la centrífuga y sacás la crema (plasma), la leche (glóbulos) y la nata (plaquetas). Los <strong>Hemoderivados</strong> son productos de laboratorio farmacéutico industrial (proteína en polvo pura o frasquito de factor).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Protocolo 4P</span>
+                        <h3>Lista de Chequeo de Enfermería (4 Puntos)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-p">1. Paciente Correcto:</span> Doble identificación.</li>
+                                <li><span class="hl-y">2. Volumen Correcto:</span> Según indicación.</li>
+                                <li><span class="hl-g">3. Hemocomponente Correcto:</span> Grupo y Rh.</li>
+                                <li><span class="hl-c">4. Vía / Vigilancia:</span> Usar catéter 18G-20G y filtro 170-260 µm.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Transfundir es como <span class="hl-y">recibir un paquete de órgano vital por correo express</span>. Tenés que mirar 4 veces la etiqueta de la caja: que el destinatario sea exactamente el de la cama, la bolsa no esté dañada ni sea de otro grupo, y la manguera esté firme.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-g">Tiempo Límite</span>
+                        <h3>Regla de las 4 Horas Transfusionales</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>La infusión de eritrocitos jamás debe superar las <span class="hl-p">4 horas</span> desde su salida de banco de sangre.</li>
+                                <li>Previene proliferación bacteriana y hemólisis.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">La sangre fuera de la heladera del banco de sangre es como <span class="hl-g">un sachet de leche abierto al sol en verano</span>. Pasadas las 4 horas se llena de bacterias y las células se pudren. Si no bajó en 4 horas, se descarta.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 5: COAGULACIÓN -->
+            <section id="sec-hemostasia" class="tab-content">
+                <div class="section-header">
+                    <h2>5. Fisiología de la Coagulación e Hemostasia</h2>
+                    <p>Factores: FVW | t-PA.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-c">Paso 1: Parche Rápido</span>
+                        <h3>Hemostasia Primaria (Vascular y Plaquetaria)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Vasoconstricción local (Serotonina, Endotelina, TxA2).</li>
+                                <li>Adhesión plaquetaria al colágeno expuesto usando el receptor <span class="hl-p">GP Ib</span> y el FVW.</li>
+                                <li>Formación del tapón hemostático primario.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Se reventó una manguera en la pared. Lo primero que hacés es <span class="hl-c">apretar el caño para que salga menos agua (vasoconstricción)</span> y ponés una <span class="hl-p">cinta adhesiva provisoria (plaquetas con el pegamento FVW)</span> para tapar el hueco rápido.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Paso 2: Hormigón Armado</span>
+                        <h3>Hemostasia Secundaria (Trombina y Fibrina)</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Cascada enzimática que convierte la protrombina en <span class="hl-p">Trombina</span>.</li>
+                                <li>La Trombina transforma el Fibrinógeno en malla de <span class="hl-g">Fibrina</span> insoluble.</li>
+                                <li>Consolida el coágulo definitivo.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">La cinta adhesiva provisoria no aguanta la presión del agua por mucho tiempo. Así que viene el albañil y <span class="hl-p">le tira cemento con una malla de alambre tejida (red de fibrina)</span> sobre la cinta. Ahora sí quedó una pared de hormigón armado fija.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Factores de Coagulación</span>
+                        <h3>Regla Vitamina K (1972) y Excepción del FVW</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li>Todos los factores se sintetizan en el hígado EXCEPTUANDO el FVW (endotelio y megacariocitos).</li>
+                                <li>Factores dependientes de Vitamina K: <span class="hl-p">Factores II, VII, IX y X</span>.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">La Vitamina K son las <span class="hl-y">pilas alcalinas que necesitan 4 herramientas específicas (10, 9, 7 y 2 -&gt; 1972)</span> para encenderse. El Factor von Willebrand es la única herramienta que no se hace en la fábrica central (hígado), sino en los talleres del caño (endotelio).</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-g">Limpieza del Coágulo</span>
+                        <h3>Anticoagulantes Naturales y Plasmina</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-g">Antitrombina III:</span> Inactiva Trombina y Factor Xa.</li>
+                                <li><span class="hl-c">Proteína C / S:</span> Inactiva factores Va y VIIIa.</li>
+                                <li><span class="hl-p">Fibrinólisis (t-PA y Plasmina):</span> La plasmina degrada la fibrina tras la cicatrización.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">Son los <span class="hl-g">inspectores de obra y la cuadrilla de limpieza</span>. Si el albañil tira cemento sin control, te tapona el caño por dentro (trombosis). Los inspectores frenan al albañil y la Plasmina viene con el martillo neumático a sacar el cemento sobrante.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 6: TRASTORNOS -->
+            <section id="sec-trastornos" class="tab-content">
+                <div class="section-header">
+                    <h2>6. Trastornos Hemorrágicos y Trombóticos</h2>
+                    <p>Hemofilias A/B, FVW y Factor V Leiden.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-p">Hemorragias</span>
+                        <h3>Hemofilia A (VIII), Hemofilia B (IX) y vWD</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-p">Hemofilia A:</span> Déficit del Factor VIII.</li>
+                                <li><span class="hl-y">Hemofilia B:</span> Déficit del Factor IX.</li>
+                                <li><span class="hl-g">Enfermedad de von Willebrand:</span> Alteración en la adhesión por falla de FVW.</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">En las hemofilias <span class="hl-p">te falta una pieza clave de la máquina de hacer cemento (pieza 8 en la A, pieza 9 en la B)</span>. Por más cinta adhesiva que pongas, el cemento nunca se endurece y no para de sangrar.</div>
+                        </div>
+                    </div>
+
+                    <div class="note-card searchable">
+                        <span class="card-badge badge-y">Hipercoagulabilidad</span>
+                        <h3>Trombofilias y Factor V Leiden</h3>
+                        <div class="tech-box">
+                            <ul>
+                                <li><span class="hl-y">Factor V Leiden:</span> Mutación que vuelve al Factor V resistente a la inactivación por Proteína C.</li>
+                                <li>Deficiencia de Antitrombina III o Proteína C/S.</li>
+                                <li>Síndrome Antifosfolípido (autoinmune).</li>
+                            </ul>
+                        </div>
+                        <div class="human-box">
+                            <div class="human-header">✎ En criollo:</div>
+                            <div class="human-text">En el Factor V Leiden, a la hormigonera de cemento <span class="hl-y">se le rompió la palanca de apagado</span>. Los inspectores gritan que pare, pero la máquina sigue volcando cemento hasta que te tapona una vena entera.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN AYUDAMEMORIAS / FLASHCARDS 100% REPARADA -->
+            <section id="sec-ayudamemorias" class="tab-content">
+                <div class="section-header">
+                    <h2>Ayudamemorias Clínicos (Flashcards)</h2>
+                    <p>Toca cualquier tarjeta para girarla y revelar la fórmula clave de memoria.</p>
+                </div>
+
+                <div class="flashcards-container">
+                    <div class="flashcard-box-fix searchable" onclick="this.classList.toggle('flipped')">
+                        <div class="fc-inner-fix">
+                            <div class="fc-side fc-side-front">
+                                <div>
+                                    <span class="card-badge badge-y">Vitamina K</span>
+                                    <h3 style="font-size:1.15rem; color:#fff; margin-top:0.4rem;">¿Cuáles factores necesitan Vitamina K?</h3>
+                                </div>
+                                <span class="fc-tap-hint">👉 Toca para girar la tarjeta</span>
+                            </div>
+                            <div class="fc-side fc-side-back">
+                                <div>
+                                    <h3 style="color:var(--fluor-pink); font-size:1.15rem; margin-bottom:0.4rem;">Regla del Año "1972"</h3>
+                                    <div class="fc-tag">Factores: 10 (X), 9 (IX), 7 (VII), 2 (II)</div>
+                                    <p style="font-size:0.85rem; color:#e2e8f0; margin-top:0.6rem;">✎ En criollo: Son las 4 herramientas que necesitan pilas alcalinas (Vit-K) para encender.</p>
+                                </div>
+                                <span style="font-size:0.75rem; color:var(--fluor-yellow);">✨ Volver a girar</span>
                             </div>
                         </div>
-                        <div class="fc-back">
-                            <div>
-                                <h3>"A-8 / B-9"</h3>
-                                <div class="fc-tag">Hemofilia A = Factor VIII (8)<br>Hemofilia B = Factor IX (9)</div>
-                                <p style="font-size: 0.8rem; color: var(--text-sub); margin-top: 0.5rem;">✎ En criollo: Falta la pieza 8 o 9 de la máquina de cemento.</p>
+                    </div>
+
+                    <div class="flashcard-box-fix searchable" onclick="this.classList.toggle('flipped')">
+                        <div class="fc-inner-fix">
+                            <div class="fc-side fc-side-front">
+                                <div>
+                                    <span class="card-badge badge-p">Hemofilias</span>
+                                    <h3 style="font-size:1.15rem; color:#fff; margin-top:0.4rem;">¿Qué factor falta en Hemofilia A y B?</h3>
+                                </div>
+                                <span class="fc-tap-hint">👉 Toca para girar la tarjeta</span>
+                            </div>
+                            <div class="fc-side fc-side-back">
+                                <div>
+                                    <h3 style="color:var(--fluor-pink); font-size:1.15rem; margin-bottom:0.4rem;">Fórmula "A-8 / B-9"</h3>
+                                    <div class="fc-tag">Hemofilia A = Factor VIII (8)<br>Hemofilia B = Factor IX (9)</div>
+                                    <p style="font-size:0.85rem; color:#e2e8f0; margin-top:0.6rem;">✎ En criollo: Falta la pieza 8 o 9 de la máquina de cemento.</p>
+                                </div>
+                                <span style="font-size:0.75rem; color:var(--fluor-yellow);">✨ Volver a girar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-box-fix searchable" onclick="this.classList.toggle('flipped')">
+                        <div class="fc-inner-fix">
+                            <div class="fc-side fc-side-front">
+                                <div>
+                                    <span class="card-badge badge-c">Límites OMS</span>
+                                    <h3 style="font-size:1.15rem; color:#fff; margin-top:0.4rem;">Valores de Hemoglobina para definir Anemia</h3>
+                                </div>
+                                <span class="fc-tap-hint">👉 Toca para girar la tarjeta</span>
+                            </div>
+                            <div class="fc-side fc-side-back">
+                                <div>
+                                    <h3 style="color:var(--fluor-pink); font-size:1.15rem; margin-bottom:0.4rem;">Secuencia "13 - 12 - 11" en g/dL</h3>
+                                    <div class="fc-tag">Hombres &lt; 13 g/dL<br>Mujeres &lt; 12 g/dL<br>Embarazadas &lt; 11 g/dL</div>
+                                    <p style="font-size:0.85rem; color:#e2e8f0; margin-top:0.6rem;">✎ En criollo: Los camiones mínimos de flete requeridos por ley.</p>
+                                </div>
+                                <span style="font-size:0.75rem; color:var(--fluor-yellow);">✨ Volver a girar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-box-fix searchable" onclick="this.classList.toggle('flipped')">
+                        <div class="fc-inner-fix">
+                            <div class="fc-side fc-side-front">
+                                <div>
+                                    <span class="card-badge badge-g">Transfusión</span>
+                                    <h3 style="font-size:1.15rem; color:#fff; margin-top:0.4rem;">Lista de Verificación de Enfermería</h3>
+                                </div>
+                                <span class="fc-tap-hint">👉 Toca para girar la tarjeta</span>
+                            </div>
+                            <div class="fc-side fc-side-back">
+                                <div>
+                                    <h3 style="color:var(--fluor-pink); font-size:1.15rem; margin-bottom:0.4rem;">Protocolo "4 Puntos" (4P)</h3>
+                                    <div class="fc-tag">1. Paciente correcto<br>2. Volumen correcto<br>3. Hemocomponente<br>4. Vía intravenosa</div>
+                                    <p style="font-size:0.85rem; color:#e2e8f0; margin-top:0.6rem;">✎ En criollo: Revisar 4 veces la etiqueta de la caja antes de conectar.</p>
+                                </div>
+                                <span style="font-size:0.75rem; color:var(--fluor-yellow);">✨ Volver a girar</span>
                             </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-inner">
-                        <div class="fc-front">
-                            <div>
-                                <span class="card-badge badge-c">Límites OMS Hemoglobina</span>
-                                <h3>Valores para definir anemia OMS</h3>
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
-                            </div>
+            <!-- SECCIÓN EXAMEN CATEGORIZADO REPARADO -->
+            <section id="sec-quiz" class="tab-content">
+                <div class="section-header">
+                    <h2>Examen de Práctica por Categoría</h2>
+                    <p>Al responder, la opción correcta se resaltará inmediatamente en verde brillante.</p>
+                </div>
+
+                <div class="quiz-topic-selector">
+                    <button class="topic-chip active" onclick="setQuizTopic('all')">🎯 Examen Global Completo</button>
+                    <button class="topic-chip" onclick="setQuizTopic('bases')">🦴 Hematopoyesis y Linfoides</button>
+                    <button class="topic-chip" onclick="setQuizTopic('anemias')">🩸 Síndrome Anémico</button>
+                    <button class="topic-chip" onclick="setQuizTopic('coagulacion')">⚡ Coagulación e Hemostasia</button>
+                    <button class="topic-chip" onclick="setQuizTopic('transfusion')">💉 Transfusión y Enfermería</button>
+                    <button class="topic-chip" onclick="setQuizTopic('trastornos')">⚠️ Trastornos Hemorrágicos</button>
+                </div>
+
+                <div class="quiz-wrapper">
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quizFill"></div>
+                    </div>
+
+                    <div style="font-size: 0.85rem; color: var(--fluor-yellow); font-weight: 700; margin-bottom: 0.4rem;" id="qIndex">PREGUNTA 1</div>
+                    <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 1.25rem; line-height: 1.5;" id="qPrompt">Cargando pregunta...</h3>
+                    
+                    <div class="quiz-correct-banner" id="qCorrectBanner"></div>
+
+                    <div id="qOptions"></div>
+                    
+                    <div class="quiz-feedback" id="qFeedback"></div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem;">
+                        <span id="qScore" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 700;">Puntaje: 0</span>
+                        <button class="btn-action" onclick="nextQuizQuestion()">Siguiente Pregunta ➔</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN VIDEOS -->
+            <section id="sec-videos" class="tab-content">
+                <div class="section-header">
+                    <h2>Videos Explicativos en Alta Definición</h2>
+                    <p>Toca para abrir directamente en YouTube en tu Galaxy Tab o iPhone 15 sin fallas de reproducción.</p>
+                </div>
+
+                <div class="video-grid">
+                    <div class="video-card-item">
+                        <div class="video-thumb-preview" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://img.youtube.com/vi/cy3a__OOa2M/hqdefault.jpg');">
+                            <div class="play-btn-overlay"></div>
                         </div>
-                        <div class="fc-back">
-                            <div>
-                                <h3>Secuencia "13 - 12 - 11" en <span class="unit-def" data-def="g/dL = Gramos por decilitro de sangre">g/dL</span></h3>
-                                <div class="fc-tag">Hombres &lt; 13 g/dL<br>Mujeres &lt; 12 g/dL<br>Embarazadas &lt; 11 g/dL</div>
-                            </div>
+                        <div class="video-details">
+                            <h4>Fisiología de la Hemostasia y Coagulación</h4>
+                            <p>Explicación visual completa de la cascada de coagulación, tapón plaquetario y fibrina.</p>
+                            <a href="https://www.youtube.com/watch?v=cy3a__OOa2M" target="_blank" class="btn-play-yt">
+                                ▶ Reproducir Video en YouTube
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="video-card-item">
+                        <div class="video-thumb-preview" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://img.youtube.com/vi/LtlodYLm8fc/hqdefault.jpg');">
+                            <div class="play-btn-overlay"></div>
+                        </div>
+                        <div class="video-details">
+                            <h4>Fisiopatología de las Anemias</h4>
+                            <p>Clasificación morfológica (microcítica, macrocítica) y diagnóstico de laboratorio.</p>
+                            <a href="https://www.youtube.com/watch?v=LtlodYLm8fc" target="_blank" class="btn-play-yt">
+                                ▶ Reproducir Video en YouTube
+                            </a>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="flashcard searchable" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-inner">
-                        <div class="fc-front">
-                            <div>
-                                <span class="card-badge badge-g">Chequeo Transfusión</span>
-                                <h3>Lista de Verificación de Enfermería</h3>
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Toca para dar vuelta</p>
-                            </div>
-                        </div>
-                        <div class="fc-back">
-                            <div>
-                                <h3>Protocolo "4 Puntos"</h3>
-                                <div class="fc-tag">1. Paciente correcto<br>2. Volumen correcto<br>3. Hemocomponente<br>4. Vía intravenosa</div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- SECCIÓN DE ANOTACIONES POP-ITS -->
+            <section class="popit-section">
+                <div class="popit-header">
+                    <h3>📌 Mis Anotaciones Personales (Pop-its de Estudio)</h3>
+                    <button class="btn-header btn-note-add" onclick="addPopit()">+ Nueva Nota</button>
                 </div>
-            </div>
-        </section>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Escribí acá tus propios apuntes, preguntas para el profesor o recordatorios. Se guardan automáticamente en tu dispositivo.</p>
+                
+                <div class="popit-grid" id="popitGrid"></div>
+            </section>
 
-        <!-- SECCIÓN EXAMEN QUIZ -->
-        <section id="sec-quiz" class="tab-content">
-            <div class="section-header">
-                <h2>Examen de Práctica de Enfermería</h2>
-                <p>Evaluación con fundamentos técnicos y explicaciones sencillas.</p>
-            </div>
-
-            <div class="quiz-wrapper">
-                <div style="font-size: 0.8rem; color: var(--fluor-yellow); font-weight: 700; margin-bottom: 0.4rem;" id="qIndex">PREGUNTA 1 DE 6</div>
-                <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 1.25rem;" id="qPrompt">Cargando pregunta...</h3>
-                <div id="qOptions"></div>
-                <div class="quiz-feedback" id="qFeedback"></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-                    <span id="qScore" style="font-size: 0.85rem; color: var(--text-muted);">Puntaje: 0</span>
-                    <button class="btn-action" onclick="nextQuizQuestion()">Siguiente Pregunta ➔</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN VIDEOS -->
-        <section id="sec-videos" class="tab-content">
-            <div class="section-header">
-                <h2>Videos Explicativos Incorporados</h2>
-                <p>Reproductores listos para ver en pantalla completa.</p>
-            </div>
-
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube-nocookie.com/embed/94Qae5w_Rvg" title="Cascada de Coagulación" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>Cascada de Coagulación e Hemostasia</h4>
-                        <p>Paso a paso de la hemostasia primaria y secundaria.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube-nocookie.com/embed/rqWzCqZcQvM" title="Fisiopatología de las Anemias" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>Fisiopatología de las Anemias</h4>
-                        <p>Clasificación morfológica y clínica completa.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
+        </main>
+    </div>
 
     <script>
-        // Modal Glosario
-        function toggleGlossaryModal() {
-            const modal = document.getElementById('glossaryModal');
-            modal.classList.toggle('active');
+        // BANCO EXTENSO Y COMPLETO DE PREGUNTAS DE EXAMEN DE ENFERMERÍA
+        const masterQuizBank = {
+            'bases': [
+                {
+                    prompt: "¿Dónde maduran específicamente los Linfocitos T inmaduros procedentes de la médula ósea?",
+                    options: ["Bazo", "Timo", "Ganglios linfáticos", "Apéndice cecal"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Los linfocitos T inmaduros migran desde la médula ósea al Timo (órgano linfoide primario) para completar su selección y diferenciación celular."
+                },
+                {
+                    prompt: "¿Qué función cumple la Pulpa Roja del bazo?",
+                    options: ["Filtra linfa de bacterias gramnegativas", "Destruye eritrocitos deteriorados (hemocateresis) y almacena plaquetas", "Produce inmunoglobulina A secretora", "Sintetiza factores K-dependientes"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La pulpa roja destruye eritrocitos viejos (tras 120 días) y actúa como reserva masiva de plaquetas y granulocitos."
+                },
+                {
+                    prompt: "Las células progenitoras de la línea Mieloide dan origen a:",
+                    options: ["Linfocitos T y Linfocitos B", "Eritrocitos, Plaquetas, Granulocitos y Monocitos", "Exclusivamente anticuerpos circulantes", "Inmunoglobulinas del MALT"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La línea Mieloide produce la estirpe eritroide, megacariocítica y granulocítica/monocítica (inmunidad innata)."
+                },
+                {
+                    prompt: "¿Qué inmunoglobulina es producida predominantemente por el tejido MALT para bloquear patógenos en mucosas?",
+                    options: ["IgG", "IgM", "IgA", "IgE"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: La IgA secretora se encuentra en mucosas digestivas y respiratorias evitando la invasión inicial de patógenos."
+                },
+                {
+                    prompt: "¿Cuál de las siguientes estructuras representa un Órgano Linfoide Primario?",
+                    options: ["Bazo", "Ganglio Linfático", "Médula Ósea", "MALT"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: Los órganos linfoides primarios (centrales) son la Médula Ósea y el Timo, donde se generan y maduran los linfocitos."
+                },
+                {
+                    prompt: "En el adulto, ¿en qué tipo de huesos se concentra la Médula Ósea Roja hematopoyética activa?",
+                    options: ["Huesos largos de las extremidades inferiores exclusivamente", "Huesos planos y cortos (esternón, pelvis, vértebras, costillas)", "Huesos sesamoides y tarsianos", "Exclusivamente en las falanges de las manos"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: En adultos la hematopoyesis activa migra al esqueleto axial y huesos planos (pelvis, esternón, vértebras)."
+                },
+                {
+                    prompt: "¿Qué tipo de leucocito representa la primera línea de defensa fagocítica rápida frente a infecciones bacterianas agudas?",
+                    options: ["Linfocito B", "Neutrófilo granulocito", "Basófilo", "Eosinófilo"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Los neutrófilos son los granulocitos más abundantes (55-70%) y los primeros en acudir al foco de infección bacteriana."
+                },
+                {
+                    prompt: "Las células de la estirpe Linfoide participan fundamentalmente en:",
+                    options: ["Fagocitosis inespecífica de cuerpos extraños", "Inmunidad adaptativa celular (T) y humoral (B)", "Hemostasia primaria y vasoconstricción", "Transporte de gases disueltos"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La línea linfoide es la responsable de la respuesta inmunitaria adaptativa, específica y con memoria."
+                },
+                {
+                    prompt: "¿Cuál es la vida media promedio en circulación de un glóbulo rojo (eritrocito) sano?",
+                    options: ["7 a 10 días", "120 días", "1 año", "24 horas"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Los eritrocitos circulan un promedio de 120 días antes de ser senescentes y fagocitados en el bazo."
+                },
+                {
+                    prompt: "La hormona Eritropoyetina (EPO), estimuladora de la eritropoyesis, es sintetizada principalmente en:",
+                    options: ["Hígado", "Riñón (células peritubulares)", "Bazo", "Médula ósea"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El riñón sintetiza cerca del 90% de la EPO en respuesta a la hipoxia tisular renal."
+                },
+                {
+                    prompt: "¿Qué compone estructuralmente la Pulpa Blanca del bazo?",
+                    options: ["Depósitos adiposos inactivos", "Tejido linfoide organizado en vainas periarteriolares (zonas B y T)", "Capilares sinusoides llenos de eritrocitos rotos", "Fibrina reticular pura"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La pulpa blanca contiene tejido linfoide periférico activador de respuestas inmunes sistémicas."
+                },
+                {
+                    prompt: "La Médula Ósea Amarilla debe su color característico a la presencia de:",
+                    options: ["Hemoglobina degradada", "Tejido adiposo (grasa inactiva)", "Bilirrubina no conjugada", "Depósitos de hierro elemental"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Con la edad, la médula roja hematopoyética es reemplazada por tejido adiposo inactivo (médula amarilla)."
+                },
+                {
+                    prompt: "Los Reticulocitos son eritrocitos inmaduros que se caracterizan por conservar:",
+                    options: ["Núcleo completo activo", "Restos de ARN ribosómico en su citoplasma", "Gránulos de histamina", "Mitocondrias maduras funcionantes"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Al expulsar el núcleo, el reticulocito conserva red ribosómica (ARN) durante 24-48h antes de ser eritrocito maduro."
+                },
+                {
+                    prompt: "¿De qué célula gigante de la médula ósea se fragmentan las Plaquetas o Trombocitos?",
+                    options: ["Mieloblasto", "Megacariocito", "Monoblasto", "Proeritroblasto"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Las plaquetas son fragmentos citoplasmáticos anucleados liberados por los megacariocitos medulares."
+                },
+                {
+                    prompt: "¿En qué estructura anatómica se ubican las Placas de Peyer como ejemplo representativo de MALT?",
+                    options: ["En el estómago", "En la mucosa del Íleon (intestino delgado)", "En los alvéolos pulmonares", "En el epidídimo"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Las placas de Peyer son folículos linfoides agregados en la lámina propia del íleon."
+                }
+            ],
+            'anemias': [
+                {
+                    prompt: "Según la OMS, se considera anemia en una mujer embarazada cuando el nivel de Hemoglobina es menor a:",
+                    options: ["< 13 g/dL", "< 12 g/dL", "< 11 g/dL", "< 10 g/dL"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: Criterio OMS: Hombres <13 g/dL, Mujeres no embarazadas <12 g/dL, Mujeres embarazadas <11 g/dL (por hemodilución fisiológica)."
+                },
+                {
+                    prompt: "Un hemograma reporta VCM < 80 fl y HCM < 27 pg. ¿Cómo se clasifica morfológicamente esta anemia?",
+                    options: ["Normocítica - Normocrómica", "Macrocítica - Hipocrómica", "Microcítica - Hipocrómica", "Normocítica - Hipercrómica"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: VCM < 80 fl indica microcitosis (eritrocitos pequeños) y HCM < 27 pg indica hipocromía (eritrocitos pálidos por falta de hemoglobina)."
+                },
+                {
+                    prompt: "¿Qué hallazgo físico en la cavidad oral es característico de la Anemia Megaloblástica por déficit de B12 o Fólico?",
+                    options: ["Glositis Atrófica (lengua roja, brillante y depapilada)", "Leucoplaquia vellosa", "Manchas de Koplik", "Hipertrofia gingival purpúrea"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La alteración en la síntesis de ADN epitelial provoca descamación y atrofia de papilas linguales (Glositis de Hunter)."
+                },
+                {
+                    prompt: "¿Por qué el tratamiento prolongado con inhibidores de bomba de protones (ej: Omeprazol) induce Anemia Megaloblástica?",
+                    options: ["Inhibe directamente a la eritropoyetina renal", "Reduce la acidez gástrica necesaria para liberar Vitamina B12 de los alimentos y unirse al Factor Intrínseco", "Induce hemólisis intravascular en el vaso esplénico", "Neutraliza el hierro ferroso intestinal"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El pH ácido es indispensable para escindir la Vitamina B12 de las proteínas alimentarias antes de unirse al Factor Intrínseco."
+                },
+                {
+                    prompt: "El signo radiológico de 'Cráneo en Cepillo' observado en pacientes con Talasemia Mayor se produce por:",
+                    options: ["Infecciones bacterianas recurrentes periostales", "Hiperplasia expansiva compensatoria de la médula ósea en la calota", "Calcificación progresiva del espacio subaracnoideo", "Necrosis avascular de huesos craneales"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La eritropoyesis ineficaz severa estimula la expansión masiva del tejido medular que destruye las trabéculas óseas craneales."
+                },
+                {
+                    prompt: "¿Qué valor de hemoglobina define una Anemia de Severidad Grave que requiere evaluación urgente?",
+                    options: ["Hb entre 10 y 12 g/dL", "Hb menor a 8 g/dL", "Hb menor a 13 g/dL", "Hb entre 9 y 10 g/dL"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: En la escala clínica, Hb > 10 g/dL es Leve, 8 a 10 g/dL es Moderada, y Hb < 8 g/dL es Anemia Grave."
+                },
+                {
+                    prompt: "¿Cuál es la principal causa de Anemia Ferropénica en hombres adultos y mujeres posmenopáusicas?",
+                    options: ["Pérdida hemática crónica del tubo digestivo", "Ingesta insuficiente de lácteos", "Déficit congénito de eritropoyetina", "Hemólisis autoinmune fría"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Toda anemia ferropénica en adultos masculinos o posmenopáusicas debe investigarse por sangrado digestivo oculto."
+                },
+                {
+                    prompt: "¿Qué diferencia fundamental existe entre una anemia regenerativa y una arregenerativa según el recuento de reticulocitos?",
+                    options: ["La regenerativa tiene reticulocitos elevados por respuesta medular adecuada", "La arregenerativa presenta hiperplasia medular extrema", "La regenerativa no responde a eritropoyetina", "Ambas presentan reticulocitos en cero"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Las anemias regenerativas (hemólisis/sangrado) muestran reticulocitos elevados (>2%), demostrando capacidad medular funcional."
+                },
+                {
+                    prompt: "La Anemia Perniciosa se genera específicamente por la destrucción autoinmune de:",
+                    options: ["Hepatocitos periportales", "Células Parietales gástricas y/o Factor Intrínseco", "Eritrocitos en el endotelio capilar", "Glérulas tiroideas"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Los autoanticuerpos destruyen las células parietales del cuerpo gástrico imposibilitando la secreción de Factor Intrínseco."
+                },
+                {
+                    prompt: "¿Cuál es el parámetro de laboratorio más sensible para detectar déficit de depósitos de hierro ANTES de que caiga la hemoglobina?",
+                    options: ["Hematocrito", "Ferritina sérica disminuida", "Recuento de leucocitos", "Volumen corpuscular medio"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La ferritina refleja las reservas corporales de hierro y es el primer parámetro en descender en la ferropenia subclínica."
+                },
+                {
+                    prompt: "La Anemia Aplásica se caracteriza analíticamente por presentar en sangre periférica:",
+                    options: ["Eritrocitosis severa", "Pancitopenia (anemia, leucopenia y trombocitopenia simultáneas)", "Trombocitosis reactiva", "Leucocitosis con desviación a la izquierda"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La aplasia medular destruye las células madre hematopoyéticas desencadenando fallo de las 3 series (pancitopenia)."
+                },
+                {
+                    prompt: "¿Qué síntoma cardiovascular compensatorio es esperable en un paciente con anemia moderada a severa?",
+                    options: ["Bradicardia extrema", "Taquicardia compensatoria y soplo funcional sistólico", "Hipertensión diastólica aislada", "Bloqueo aurículoventricular de 3er grado"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Para compensar la menor viscosidad y la hipoxia tisular, el corazón aumenta el gasto cardíaco elevando la frecuencia cardiaca."
+                },
+                {
+                    prompt: "Al administrar hierro oral (sulfato ferroso), ¿qué indicación de enfermería debe aclararse al paciente respecto a las heces?",
+                    options: ["Las heces se volverán de color blanco arcilloso", "Las heces tomarán un color negro/oscuro por eliminación del hierro no absorbido (efecto normal)", "Aparecerá melena digestiva grave", "No habrá ningún cambio"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El hierro no absorbido se oxida en el intestino tiñendo las deposiciones de color negro, hallazgo benigno esperado."
+                },
+                {
+                    prompt: "¿En qué segmento del tracto gastrointestinal se absorbe de forma óptima el hierro de la dieta?",
+                    options: ["Boca", "Duodeno y Yeyuno proximal", "Colon descendente", "Estómago fondo"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El duodeno y yeyuno proximal poseen los transportadores enterocíticos (DMT1 y ferroportina) para la absorción de hierro."
+                },
+                {
+                    prompt: "En la Anemia por Trastornos Crónicos (o inflamatoria), el perfil de hierro típicamente muestra:",
+                    options: ["Hierro sérico bajo con Ferritina sérica normal o elevada", "Ferritina en cero", "Saturación de transferrina al 100%", "VCM de 130 fl"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La hepcidina inflamatoria bloquea la salida de hierro desde los macrófagos, atrapándolo en depósitos (ferritina alta)."
+                },
+                {
+                    prompt: "¿Qué signo clínico de laboratorio indica un proceso de Anemia Hemolítica activa?",
+                    options: ["Hiperbilirrubinemia indirecta (no conjugada) e haptoglobina consumida/baja", "Ferritina cero", "Leucopenia < 1000", "Bilirrubina directa aumentada con coluria"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La rotura eritrocitaria masiva libera hemoglobina que degrada en bilirrubina indirecta y consume la haptoglobina fijadora."
+                }
+            ],
+            'coagulacion': [
+                {
+                    prompt: "¿Cuál de los siguientes factores de coagulación NO se sintetiza en los hepatocitos del hígado?",
+                    options: ["Factor II (Protrombina)", "Factor VIII", "Factor von Willebrand (FVW)", "Factor X (Stuart-Prower)"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: El FVW es sintetizado y secretado exclusivamente por el endotelio vascular y los megacariocitos."
+                },
+                {
+                    prompt: "¿Cuáles son los cuatro factores de coagulación dependientes de Vitamina K para su carboxilación?",
+                    options: ["Factores I, V, VIII y X", "Factores II, VII, IX y X", "Factores VIII, IX, XI y XII", "Factores I, II, V y VII"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Regla nemotécnica del año '1972': Factores 10 (X), 9 (IX), 7 (VII) y 2 (II)."
+                },
+                {
+                    prompt: "¿Qué enzima central convierte el Fibrinógeno plasmático en la malla insoluble de Fibrina?",
+                    options: ["Trombina (Factor IIa)", "Plasmina", "Antitrombina III", "Factor Hageman"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La Trombina cataliza la escisión de péptidos del fibrinógeno para polimerizar la red sólida de fibrina."
+                },
+                {
+                    prompt: "¿Qué función cumple el t-PA (Activador Tisular del Plasminógeno) en el vaso sanguíneo?",
+                    options: ["Provoca vasoconstricción directa", "Activa el plasminógeno a Plasmina para disolver la malla de fibrina (Fibrinólisis)", "Promueve la agregación plaquetaria primaria", "Sintetiza protrombina funcional"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El t-PA endotelial transforma el plasminógeno en plasmina, degradando el coágulo una vez reparado el vaso."
+                },
+                {
+                    prompt: "Durante la Hemostasia Primaria, las plaquetas se adhieren al subendotelio expuesto mediante el receptor:",
+                    options: ["Glicoproteína Ib (GP Ib) y Factor von Willebrand", "Receptor de Insulina", "Factor de Necrosis Tumoral", "Albúmina fosforilada"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La adhesión plaquetaria inicial requiere la unión del complejo membranoso GP Ib al FVW expuesto en el colágeno."
+                },
+                {
+                    prompt: "¿Qué anticoagulante fisiológico inactiva de forma directa a la Trombina y al Factor Xa?",
+                    options: ["Antitrombina III", "Factor VIIa", "Fibrinógeno", "Histamina"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La Antitrombina III es el principal inhibidor natural del sistema procoagulante en sangre."
+                },
+                {
+                    prompt: "¿Qué catión (ion) actúa como el Factor IV de la coagulación siendo indispensable en casi todas las etapas de la cascada?",
+                    options: ["Hierro (Fe++)", "Calcio (Ca++)", "Sodio (Na+)", "Potasio (K+)"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El ion Calcio (Ca++) ensambla los complejos enzimáticos sobre las membranas fosfolipídicas plaquetarias."
+                },
+                {
+                    prompt: "La Vía Extrínseca de la coagulación iniciada por el Factor Tisular se evalúa en laboratorio mediante:",
+                    options: ["Tiempo de Sangría", "Tiempo de Protrombina (TP / RIN)", "KPTT / aPTT", "Tiempo de Trombina"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El TP mide la actividad del Factor VII y la vía extrínseca (sensible a acenocumarol/warfarina)."
+                },
+                {
+                    prompt: "La Vía Intrínseca de la coagulación (Factores XII, XI, IX, VIII) se evalúa en el laboratorio mediante:",
+                    options: ["Tiempo de Tromboplastina Parcial Activado (KPTT / aPTT)", "Tiempo de Protrombina (TP)", "Recuento plaquetario", "Dosaje de D-Dímero"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El KPTT evalúa la vía intrínseca y común (parámetro de control para Heparinas no fraccionadas)."
+                },
+                {
+                    prompt: "El complejo receptor plaquetario fundamental para la AGREGACIÓN plaquetaria entre sí mediante puentes de Fibrinógeno es:",
+                    options: ["GP Ib/IX", "Glicoproteína IIb/IIIa (GP IIb/IIIa)", "CD4", "Receptor Scavenger"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La agregación plaquetaria requiere la activación de GP IIb/IIIa que fija fibrinógeno para unir plaquetas contiguas."
+                },
+                {
+                    prompt: "¿Qué sustancia derivada del ácido araquidónico liberada por las plaquetas estimula su propia agregación y vasoconstricción?",
+                    options: ["Prostaciclina (PGI2)", "Tromboxano A2 (TxA2)", "Óxido Nítrico", "Heparina"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El TxA2 es sintetizado por la COX-1 plaquetaria promoviendo reclutamiento plaquetario y espasmo vascular."
+                },
+                {
+                    prompt: "El mecanismo de acción antiagregante de la Aspirina (Ácido Acetilsalicílico) a dosis bajas consiste en:",
+                    options: ["Inhibición irreversible de la enzima Ciclooxigenasa-1 (COX-1) plaquetaria", "Bloqueo de la trombina", "Destrucción del Factor X", "Inactivación de la plasmina"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La aspirina acetila irreversiblemente la COX-1 suprimiendo la síntesis de Tromboxano A2 durante la vida media plaquetaria."
+                },
+                {
+                    prompt: "¿Qué proteína anticoagulante natural junto con la Proteína S degrada e inactiva a los factores activados Va y VIIIa?",
+                    options: ["Proteína C Activada", "Factor von Willebrand", "Fibrina", "Proconvertina"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El sistema Proteína C/Proteína S es un freno fisiológico esencial contra la amplificación de la trombina."
+                },
+                {
+                    prompt: "El marcador analítico de 'Dímero D' en plasma representa un producto específico de la degradación de:",
+                    options: ["Fibrinógeno no coagulado", "Fibrina polimerizada y entrecruzada lisada por plasmina", "Plaquetas destruidas", "Colágeno vascular"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El Dímero D se genera únicamente cuando la plasmina degrada una malla de fibrina que fue previamente estabilizada."
+                },
+                {
+                    prompt: "¿Cuál es el principal anticoagulante endotelial que bloquea al complejo Factor Tisular / Factor VIIa?",
+                    options: ["TFPI (Inhibidor de la Vía del Factor Tisular)", "Trombina", "Vitamina K", "Factor XIII"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El TFPI es sintetizado por el endotelio para apagar la iniciación de la vía extrínseca."
+                }
+            ],
+            'transfusion': [
+                {
+                    prompt: "¿Cuál es el tiempo máximo límite para infundir una unidad de Concentrado de Eritrocitos desde su salida de Banco de Sangre?",
+                    options: ["2 horas", "4 horas", "6 horas", "8 horas"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Por norma de seguridad transfusional, la infusión no debe exceder las 4 horas para evitar la contaminación bacteriana y la hemólisis."
+                },
+                {
+                    prompt: "¿Cuál de los siguientes productos es un HEMODERIVADO (obtenido por procesamiento industrial) y no un hemocomponente?",
+                    options: ["Concentrado de Hematíes", "Plasma Fresco Congelado", "Albúmina Humana al 20%", "Plaquetas de Aféresis"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: La Albúmina y las Inmunoglobulinas se fraccionan industrialmente (hemoderivados). Los hematíes, plasma y plaquetas son hemocomponentes."
+                },
+                {
+                    prompt: "En la lista de verificación transfusional de 4 puntos (Protocolo 4P), ¿cuáles son las prioridades de Enfermería?",
+                    options: ["Paciente correcto, Volumen correcto, Hemocomponente correcto y Vía/Vigilancia adecuada", "Presión arterial, Piel, Pupilas y Prototipo", "Peso, Pulsaciones, Plaquetas y Plasma", "Punción, Paquete, Procedimiento y Prescripción"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Protocolo 4P: 1. Paciente correcto, 2. Volumen correcto, 3. Hemocomponente y Rh correcto, 4. Vía IV permeable con filtro."
+                },
+                {
+                    prompt: "¿Qué calibre de catéter periférico (Gauge) es el recomendado para administrar Concentrado de Eritrocitos sin causar hemólisis?",
+                    options: ["24G a 26G (muy delgado)", "18G a 20G (calibre adecuado)", "27G exclusivamente", "Cualquier calibre con aguja de insulina"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Los calibres 18G u 20G permiten el paso de glóbulos rojos sin someterlos a fuerzas de cizallamiento que rompan la membrana celular."
+                },
+                {
+                    prompt: "¿Qué tamaño de poro tiene el filtro estándar obligatorio de los equipos de transfusión de sangre?",
+                    options: ["10 a 20 micrómetros (µm)", "170 a 260 micrómetros (µm)", "500 a 1000 micrómetros (µm)", "Sin filtro"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El filtro de transfusión de 170-260 µm retiene microagregados celulares, fibrina y detritos durante la administración."
+                },
+                {
+                    prompt: "¿Cuál es la ÚNICA solución IV cristaloides compatible para infundir en la misma manguera con glóbulos rojos?",
+                    options: ["Dextrosa al 5%", "Solución Fisiológica 0,9% (NSS)", "Ringer Lactato", "Solución glucosada al 10%"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La Solución Fisiológica al 0,9% es isoosmótica. La Dextrosa causa aglutinación y hemólisis, y el Ringer Lactato coagula la bolsa por el Calcio."
+                },
+                {
+                    prompt: "Un paciente en transfusión presenta dolor lumbar agudo, fiebre, opresión torácica y orina oscura. Enfermería debe sospechar inmediatamente:",
+                    options: ["Reacción Transfusional Hemolítica Aguda por incompatibilidad ABO", "Alergia leve por polvillo", "Sobrecarga cardíaca leve", "Infección viral crónica"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Es una emergencia letal por destrucción intravascular masiva. Se debe suspender la transfusión de inmediato."
+                },
+                {
+                    prompt: "Durante los primeros 15 minutos de haber iniciado una transfusión sanguínea, la conducta de enfermería debe ser:",
+                    options: ["Dejar solo al paciente e ir a preparar fichas", "Infundir a goteo lento (1-2 mL/min) con vigilancia continua a la cabecera", "Infundir a máxima velocidad la bolsa", "Apagar el monitor"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La mayoría de las reacciones severas de incompatibilidad inmunológica ocurren en los primeros 50 mL de infusión."
+                },
+                {
+                    prompt: "El Plasma Fresco Congelado (PFC) administrado para revertir coagulopatías debe descongelarse previamente a:",
+                    options: ["10°C", "37°C en baño termostatizado", "60°C al microondas", "Temperatura ambiente 12 horas"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El PFC se descongela a 37°C en baño termostatizado para preservar la actividad biológica de los factores de coagulación."
+                },
+                {
+                    prompt: "Las unidades de Concentrado de Plaquetas en Banco de Sangre se almacenan bajo qué condiciones únicas?",
+                    options: ["Congeladas a -80°C", "A temperatura ambiente (20-24°C) en agitación continua suave", "En heladera a 4°C inmóviles", "En solución ácida"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Las plaquetas pierden función a 4°C; se conservan a 20-24°C con agitación continua para evitar que se agreguen."
+                },
+                {
+                    prompt: "El Crioprecipitado es un hemocomponente rico concentrado principalmente en:",
+                    options: ["Fibrinógeno, Factor VIII, Factor XIII y Factor von Willebrand", "Albúmina al 90%", "Hemoglobina pura", "Linfocitos T CD8"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El crioprecipitado se obtiene al descongelar plasma a 4°C y contiene alta concentración de Fibrinógeno y Factor VIII."
+                },
+                {
+                    prompt: "La complicación transfusional conocida como TACO (Sobrecarga Circulatoria Asociada a Transfusión) se manifiesta clínicamente por:",
+                    options: ["Disnea súbita, hipertensión arterial, yugulares ingurgitadas y estertores crepitantes", "Hipotermia leve", "Rash cutáneo sin disnea", "Disuria"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: TACO ocurre por infusión excesivamente rápida de volumen en pacientes con reserva cardiopulmonar reducida."
+                },
+                {
+                    prompt: "¿Cuál es la primera medida de emergencia que DEBE realizar enfermería ante cualquier sospecha de reacción transfusional?",
+                    options: ["Aumentar el goteo para lavar la manguera", "Detener inmediatamente la transfusión y mantener vía venosa con Solución Fisiológica", "Administrar aspirina oral", "Esperar 1 hora a ver si pasa"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La primera indicación crítica es cerrar la llave de paso de la sangre y preservar el acceso venoso con SF al 0,9%."
+                },
+                {
+                    prompt: "¿Por qué NO se debe añadir ningún medicamento dentro de la bolsa de sangre o manguera transfusional?",
+                    options: ["Por riesgo de alterar el pH, precipitar componentes o inducir hemólisis celular", "Porque el medicamento se vuelve inactivo por la luz", "Porque se coagula el frasco de medicación", "Por costo económico"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El pH y la osmolaridad de los fármacos pueden lisar los eritrocitos o alterar los factores de coagulación."
+                },
+                {
+                    prompt: "¿Qué grupo y factor sanguíneo se considera el Donante Universal de Concentrado de Eritrocitos en emergencias extremos?",
+                    options: ["AB Rhesus Positivo (AB+)", "O Rhesus Negativo (O-)", "A Rhesus Negativo (A-)", "B Rhesus Positivo (B+)"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: El grupo O Rh Negativo carece de antígenos A, B y Rh (D) en la membrana eritrocitaria, reduciendo el riesgo hemolítico."
+                }
+            ],
+            'trastornos': [
+                {
+                    prompt: "¿Qué factor de coagulación se encuentra deficitario en la Hemofilia A?",
+                    options: ["Factor IX", "Factor VIII", "Factor XI", "Factor V"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Hemofilia A = Déficit congénito de Factor VIII. (Regla nemotécnica: A-8, B-9)."
+                },
+                {
+                    prompt: "¿Qué factor de coagulación se encuentra deficitario en la Hemofilia B (Enfermedad de Christmas)?",
+                    options: ["Factor VII", "Factor VIII", "Factor IX", "Factor XII"],
+                    correct: 2,
+                    explain: "Fundamento Técnico: Hemofilia B = Déficit congénito de Factor IX. (Regla nemotécnica: A-8, B-9)."
+                },
+                {
+                    prompt: "La mutación del Factor V Leiden provoca una alteración prothrombótica porque:",
+                    options: ["Impide la formación de fibrina", "Vuelve al Factor V resistente a la inactivación por la Proteína C Activada", "Destruye las plaquetas en el bazo", "Bloquea la síntesis de vitamina K"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La alteración genética impide que la Proteína C destruya al Factor V, generando un estado de hipercoagulabilidad permanente."
+                },
+                {
+                    prompt: "¿Cuál es el trastorno hemorrágico hereditario más frecuente en la población general?",
+                    options: ["Hemofilia A", "Enfermedad de von Willebrand (vWD)", "Hemofilia B", "Déficit de Factor XIII"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: La Enfermedad de von Willebrand es la coagulopatía congénita autosómica más prevalente."
+                },
+                {
+                    prompt: "Un paciente con trombocitopenia severa presenta un recuento de plaquetas menor a 20.000/µL. ¿Cuál es el principal riesgo clínico?",
+                    options: ["Trombosis venosa profunda súbita", "Hemorragia espontánea mucosa y sistema nervioso central", "Aumento extremo del hematocrito", "Hipertensión arterial maligna"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Recuentos plaquetarios < 20.000/µL aumentan críticamente el riesgo de sangrado espontáneo visceral y cerebral."
+                },
+                {
+                    prompt: "La Coagulación Intravascular Diseminada (CID) es un síndrome complejo caracterizado fisiopatológicamente por:",
+                    options: ["Trombosis microvascular masiva consumo de factores/plaquetas y sangrado consecutivo", "Hiperproducción hepática de fibrinógeno", "Aumento de glóbulos rojos", "Defectos leves de vitamina K"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La CID activa masivamente la coagulación consumiendo todos los factores y plaquetas, desencadenando hemorragias graves."
+                },
+                {
+                    prompt: "En la Púrpura Trombocitopénica Inmune (PTI), el mecanismo primario de destrucción de plaquetas es:",
+                    options: ["Lisis enzimática renal", "Opsonización por autoanticuerpos IgG y fagocitosis en macrófagos del bazo", "Destrucción bacteriana intravascular", "Falta de producción medular"],
+                    correct: 1,
+                    explain: "Fundamento Técnico: Autoanticuerpos recubren las plaquetas y el bazo las destruye aceleradamente."
+                },
+                {
+                    prompt: "Las Petequias y Púrpuras cutáneas son manifestaciones típicas de sangrado causadas por defectos en:",
+                    options: ["La hemostasia primaria (plaquetas o vasos)", "La vía extrínseca puramente", "Falta de Factor VIII", "Fibrinólisis alterada"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Los punteados hemorrágicos cutáneos (petequias) indican alteración plaquetaria o fragilidad capilar."
+                },
+                {
+                    prompt: "Las Hemartrosis (sangrado severo dentro de cavidades articulaciones) son lesiones características de:",
+                    options: ["Hemofilia grave (déficit de Factor VIII o IX)", "Deficiencia leve de Vitamina C", "Púrpura trombocitopénica", "Anemia ferropénica"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El déficit grave de factores de coagulación (hemofilia) produce extravasación en articulaciones de carga (rodillas, tobillos)."
+                },
+                {
+                    prompt: "El Síndrome Antifosfolípido (SAF) es una trombofilia adquirida de origen autoinmune que cursa con:",
+                    options: ["Trombosis arteriales y venosas recurrentes y abortos de repetición", "Hemofilia severa", "Anemia falciforme", "Hipotensión ortostática"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Autoanticuerpos (anticoagulante lúpico/anticardiolipinas) activan endotelio y plaquetas promoviendo trombosis."
+                },
+                {
+                    prompt: "El tratamiento de elección agudo ante una hemorragia activa en un paciente con Hemofilia A es:",
+                    options: ["Administración de Concentrado purificado de Factor VIII recombinante o plasmático", "Vitamina K intramuscular", "Ácido acetilsalicílico", "Plasma rico en eritrocitos"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El reemplazo específico del factor faltante (Factor VIII) restaura inmediatamente la hemostasia secundaria."
+                },
+                {
+                    prompt: "El fármaco Desmopresina (DDAVP) se utiliza en el tratamiento de formas leves de Enfermedad de von Willebrand porque:",
+                    options: ["Estimula la liberación endotelial del FVW y Factor VIII almacenados en los cuerpos de Weibel-Palade", "Inactiva la heparina", "Aumenta la síntesis renal de EPO", "Destruye la fibrina"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: El DDAVP es un análogo de vasopresina que induce secreción rápida de FVW preformado desde el endotelio."
+                },
+                {
+                    prompt: "El Síndrome Urémico Hemolítico (SUH), frecuente en pediatría por toxina Shiga, presenta la tríada clásica de:",
+                    options: ["Anemia hemolítica microangiopática, Trombocitopenia e Insuficiencia Renal Aguda", "Fiebre, Convulsiones y Hepatomegalia", "Hipertensión, Policitemia y Artritis", "Asma, Urticaria y Shock"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: La toxina bacteriana lesiona el endotelio renal generando microtrombos, destrucción de plaquetas y esquistocitos."
+                },
+                {
+                    prompt: "El fenómeno laboratorio conocido como 'Anticoagulante Lúpico' se caracteriza paradójicamente por:",
+                    options: ["Prolongar el KPTT in vitro pero predisponer a eventos trombóticos in vivo", "Acortar el tiempo de sangría a cero", "Elevar las plaquetas a 1 millón", "Curar la trombosis"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Los anticuerpos interfieren con los fosfolípidos del ensayo de laboratorio alargando el KPTT, pero in vivo inducen trombosis."
+                },
+                {
+                    prompt: "La Trombocitopenia Inducida por Heparina de tipo II (HIT II) es una complicación inmune grave mediada por anticuerpos contra el complejo:",
+                    options: ["Heparina / Factor Plaqueta 4 (PF4)", "Albúmina / Calcio", "Factor VIII / Fibrinógeno", "Eritropoyetina / Hierro"],
+                    correct: 0,
+                    explain: "Fundamento Técnico: Los anticuerpos anti-Heparina/PF4 activan intensamente a las plaquetas desencadenando trombosis masivas y caída de plaquetas."
+                }
+            ]
+        };
+
+        let currentQuizList = [];
+        let curQIndex = 0;
+        let quizScore = 0;
+        let isAnswered = false;
+
+        function setQuizTopic(topic) {
+            document.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('active'));
+            if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+            if (topic === 'all') {
+                currentQuizList = [
+                    ...masterQuizBank.bases,
+                    ...masterQuizBank.anemias,
+                    ...masterQuizBank.coagulacion,
+                    ...masterQuizBank.transfusion,
+                    ...masterQuizBank.trastornos
+                ];
+            } else {
+                currentQuizList = masterQuizBank[topic] || masterQuizBank.bases;
+            }
+
+            curQIndex = 0;
+            quizScore = 0;
+            loadCurrentQuestion();
         }
 
-        // Cambio de sección
+        function loadCurrentQuestion() {
+            isAnswered = false;
+            const q = currentQuizList[curQIndex];
+            
+            document.getElementById('qIndex').innerText = `PREGUNTA ${curQIndex + 1} DE ${currentQuizList.length}`;
+            document.getElementById('qPrompt').innerText = q.prompt;
+            document.getElementById('quizFill').style.width = `${((curQIndex + 1) / currentQuizList.length) * 100}%`;
+
+            document.getElementById('qCorrectBanner').style.display = 'none';
+
+            const box = document.getElementById('qOptions');
+            box.innerHTML = '';
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.id = `opt-${idx}`;
+                btn.innerText = `${String.fromCharCode(65 + idx)}. ${optText}`;
+                btn.onclick = () => answerQuestion(idx);
+                box.appendChild(btn);
+            });
+
+            document.getElementById('qFeedback').style.display = 'none';
+        }
+
+        function answerQuestion(selectedIdx) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const q = currentQuizList[curQIndex];
+            const buttons = document.querySelectorAll('.quiz-option');
+            const fb = document.getElementById('qFeedback');
+            const banner = document.getElementById('qCorrectBanner');
+
+            // Deshabilitar clics posteriores
+            buttons.forEach(btn => btn.classList.add('disabled'));
+
+            // Resaltar SIEMPRE la opción correcta en VERDE FLÚOR RESALTE
+            const correctBtn = document.getElementById(`opt-${q.correct}`);
+            if (correctBtn) {
+                correctBtn.classList.add('opt-correct');
+                correctBtn.innerHTML = `✅ <strong>${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</strong> <span style="margin-left:auto; background:var(--fluor-green); color:#000; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.75rem;">RESPUESTA CORRECTA</span>`;
+            }
+
+            // Si el usuario eligió mal, marcar su opción elegida en ROSA/ROJO
+            if (selectedIdx !== q.correct) {
+                const wrongBtn = document.getElementById(`opt-${selectedIdx}`);
+                if (wrongBtn) {
+                    wrongBtn.classList.add('opt-wrong');
+                    wrongBtn.innerHTML = `❌ <strong>${String.fromCharCode(65 + selectedIdx)}. ${q.options[selectedIdx]}</strong> <span style="margin-left:auto; background:var(--fluor-pink); color:#fff; padding:2px 8px; border-radius:4px; font-weight:800; font-size:0.75rem;">TU SELECCIÓN</span>`;
+                }
+                banner.style.borderColor = 'var(--fluor-pink)';
+                banner.style.color = '#ffffff';
+                banner.style.background = 'rgba(255, 102, 196, 0.25)';
+                banner.innerHTML = `❌ <strong>Incorrecto.</strong> Tu respuesta: (${String.fromCharCode(65 + selectedIdx)}).<br>👉 <strong>Opción Correcta: ${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</strong>`;
+            } else {
+                banner.style.borderColor = 'var(--fluor-green)';
+                banner.style.color = '#ffffff';
+                banner.style.background = 'rgba(57, 255, 20, 0.25)';
+                banner.innerHTML = `✅ <strong>¡Excelente! Respuesta Correcta: ${String.fromCharCode(65 + q.correct)}. ${q.options[q.correct]}</strong>`;
+                quizScore += 10;
+            }
+
+            banner.style.display = 'block';
+            fb.innerHTML = `<strong>💡 Explicación de la Respuesta Correcta:</strong><br>${q.explain}`;
+            fb.style.display = 'block';
+            document.getElementById('qScore').innerText = `Puntaje: ${quizScore}`;
+        }
+
+        function nextQuizQuestion() {
+            curQIndex = (curQIndex + 1) % currentQuizList.length;
+            loadCurrentQuestion();
+        }
+
+        // ANOTACIONES POP-ITS
+        let popits = JSON.parse(localStorage.getItem('hemo_popits') || '["Recordar repasar la regla 13-12-11 de la OMS para el parcial de mañana."]');
+        function savePopits() { localStorage.setItem('hemo_popits', JSON.stringify(popits)); }
+        function renderPopits() {
+            const container = document.getElementById('popitGrid');
+            container.innerHTML = '';
+            popits.forEach((text, i) => {
+                const card = document.createElement('div');
+                card.className = 'popit-card';
+                card.innerHTML = `
+                    <textarea onchange="updatePopit(${i}, this.value)" placeholder="Escribí tu nota...">${text}</textarea>
+                    <div class="popit-footer">
+                        <span style="font-size:0.75rem; color:var(--text-muted);">Nota #${i+1}</span>
+                        <button class="btn-del-popit" onclick="deletePopit(${i})">Eliminar</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        function addPopit() { popits.push(''); savePopits(); renderPopits(); }
+        function updatePopit(index, text) { popits[index] = text; savePopits(); }
+        function deletePopit(index) { popits.splice(index, 1); savePopits(); renderPopits(); }
+
+        // CAMBIO DE SECCIÓN
         function switchSection(secId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -1243,7 +1624,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Buscador
+        // BUSCADOR
         function filterNotes() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const items = document.querySelectorAll('.searchable');
@@ -1258,94 +1639,9 @@
             });
         }
 
-        // Quiz
-        const quizBank = [
-            {
-                prompt: "¿Cuál de los siguientes factores de coagulación es producido por células endoteliales y megacariocitos, y NO por el hígado?",
-                options: ["Factor II", "Factor VIII", "Factor von Willebrand (FVW)", "Factor X"],
-                correct: 2,
-                explain: "¡Exacto! El Factor von Willebrand (FVW) no se sintetiza en el hígado, sino en el tejido endotelial y megacariocitos."
-            },
-            {
-                prompt: "En una mujer no embarazada, ¿cuál es el nivel umbral de Hemoglobina para diagnosticar Anemia según la OMS?",
-                options: ["< 13 g/dL", "< 12 g/dL", "< 11 g/dL", "< 10 g/dL"],
-                correct: 1,
-                explain: "¡Correcto! Regla 13-12-11: Hombres <13 g/dL, Mujeres <12 g/dL, Embarazadas <11 g/dL."
-            },
-            {
-                prompt: "¿Cuáles factores de coagulación dependen de la Vitamina K?",
-                options: ["I, V, VIII y X", "II, VII, IX y X", "VIII, IX, XI y XII", "I, II, V y VII"],
-                correct: 1,
-                explain: "¡Muy bien! Recuerda la regla del año '1972' (10, 9, 7 y 2)."
-            },
-            {
-                prompt: "El signo radiológico de 'Cráneo en Cepillo' en la Talasemia se debe a:",
-                options: ["Infección ósea", "Hiperplasia expansiva de la médula ósea", "Sobrecarga de hierro", "Deficiencia de calcio"],
-                correct: 1,
-                explain: "¡Correcto! La anemia severa estimula la hiperplasia expansiva de la médula ósea dentro de los huesos planos del cráneo."
-            },
-            {
-                prompt: "¿Cuál es el tiempo máximo de infusión permitido para un concentrado de eritrocitos?",
-                options: ["2 horas", "4 horas", "6 horas", "8 horas"],
-                correct: 1,
-                explain: "¡Correcto! Máximo 4 horas fuera de la heladera del banco de sangre para evitar la proliferación bacteriana y la lisis celular."
-            }
-        ];
-
-        let curQ = 0;
-        let scoreCount = 0;
-        let answeredQ = false;
-
-        function loadQuizQ() {
-            answeredQ = false;
-            const q = quizBank[curQ];
-            document.getElementById('qIndex').innerText = `PREGUNTA ${curQ + 1} DE ${quizBank.length}`;
-            document.getElementById('qPrompt').innerText = q.prompt;
-
-            const box = document.getElementById('qOptions');
-            box.innerHTML = '';
-
-            q.options.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerText = `${String.fromCharCode(65 + i)}. ${opt}`;
-                btn.onclick = () => answerQuiz(i);
-                box.appendChild(btn);
-            });
-
-            document.getElementById('qFeedback').style.display = 'none';
-        }
-
-        function answerQuiz(idx) {
-            if (answeredQ) return;
-            answeredQ = true;
-
-            const q = quizBank[curQ];
-            const btns = document.querySelectorAll('.quiz-option');
-            const fb = document.getElementById('qFeedback');
-
-            if (idx === q.correct) {
-                btns[idx].classList.add('correct');
-                fb.style.borderColor = 'var(--fluor-green)';
-                fb.innerHTML = `<strong>¡Correcto!</strong> ${q.explain}`;
-                scoreCount += 10;
-            } else {
-                btns[idx].classList.add('wrong');
-                btns[q.correct].classList.add('correct');
-                fb.style.borderColor = 'var(--fluor-pink)';
-                fb.innerHTML = `<strong>Incorrecto.</strong> ${q.explain}`;
-            }
-
-            fb.style.display = 'block';
-            document.getElementById('qScore').innerText = `Puntaje: ${scoreCount}`;
-        }
-
-        function nextQuizQuestion() {
-            curQ = (curQ + 1) % quizBank.length;
-            loadQuizQ();
-        }
-
-        loadQuizQ();
+        // Cargar Inicial
+        setQuizTopic('all');
+        renderPopits();
     </script>
 </body>
 </html>
