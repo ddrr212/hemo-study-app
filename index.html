@@ -229,10 +229,32 @@
         .custom-table th, .custom-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border-paper); text-align: left; }
         .custom-table th { color: var(--fluor-cyan); font-weight: 700; background: rgba(255, 255, 255, 0.04); }
 
-        /* POP-ITS */
+        /* POP-ITS - Panel lateral desplegable */
+        .popit-toggle-btn {
+            position: fixed; left: 1rem; bottom: 2rem; z-index: 99;
+            background: linear-gradient(135deg, var(--fluor-pink), var(--fluor-purple));
+            color: #fff; border: none; border-radius: 14px; padding: 0.6rem 1rem;
+            font-size: 0.85rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+            display: flex; align-items: center; gap: 0.4rem;
+            transition: all 0.25s ease;
+        }
+        .popit-toggle-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+        .popit-toggle-btn.active { background: linear-gradient(135deg, var(--fluor-cyan), var(--fluor-green)); }
+
         .popit-section {
-            width: 100%; margin-top: 2rem; background: rgba(22, 32, 53, 0.8);
+            position: fixed; left: -380px; bottom: 100px; width: 360px;
+            max-height: calc(100vh - 140px); overflow-y: auto; z-index: 99;
+            background: rgba(22, 32, 53, 0.95);
             border: 1.5px dashed var(--fluor-pink); border-radius: 20px; padding: 1.25rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4); backdrop-filter: blur(10px);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.3, 1);
+        }
+        .popit-section.active { left: 1rem; }
+
+        @media (max-width: 899px) {
+            .popit-toggle-btn { display: none; }
+            .popit-section { position: relative; left: 0; bottom: 0; width: 100%; max-height: none; margin: 1rem 0; }
         }
 
         .popit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
@@ -1001,8 +1023,13 @@
                 </div>
             </section>
 
+            <!-- BOTÓN DE DESPLEGAR AYUDAMEMORIAS EN LA IZQUIERDA -->
+            <button class="popit-toggle-btn" onclick="togglePopits()" id="popitToggleBtn">
+                📌 Ayudamemorias
+            </button>
+
             <!-- SECCIÓN DE ANOTACIONES POP-ITS -->
-            <section class="popit-section">
+            <section class="popit-section" id="popitSection">
                 <div class="popit-header">
                     <h3>📌 Mis Anotaciones Personales (Pop-its de Estudio)</h3>
                     <button class="btn-header btn-note-add" onclick="addPopit()">+ Nueva Nota</button>
@@ -1589,6 +1616,17 @@
         // ANOTACIONES POP-ITS
         let popits = JSON.parse(localStorage.getItem('hemo_popits') || '["Recordar repasar la regla 13-12-11 de la OMS para el parcial de mañana."]');
         function savePopits() { localStorage.setItem('hemo_popits', JSON.stringify(popits)); }
+        function togglePopits() {
+            const section = document.getElementById('popitSection');
+            const btn = document.getElementById('popitToggleBtn');
+            section.classList.toggle('active');
+            btn.classList.toggle('active');
+            if (section.classList.contains('active')) {
+                btn.innerHTML = '📌 Cerrar Ayudamemorias';
+            } else {
+                btn.innerHTML = '📌 Ayudamemorias';
+            }
+        }
         function renderPopits() {
             const container = document.getElementById('popitGrid');
             container.innerHTML = '';
