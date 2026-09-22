@@ -176,14 +176,30 @@
         .glossary-list { display: flex; flex-direction: column; gap: 0.75rem; }
         .glossary-item { background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-paper); border-radius: 10px; padding: 0.7rem 0.85rem; }
         .glossary-term { font-weight: 700; font-size: 0.9rem; color: var(--fluor-cyan); margin-bottom: 0.2rem; }
-        .glossary-desc { font-size: 0.825rem; color: var(--text-sub); line-height: 1.4; }
+         .glossary-desc { font-size: 0.825rem; color: var(--text-sub); line-height: 1.4; }
+
+        .glossary-toggle-btn {
+            display: none;
+            position: fixed; left: 0.25rem; top: 70px; z-index: 101;
+            background: var(--fluor-yellow); color: #000; border: none;
+            border-radius: 0 12px 12px 0; padding: 0.7rem 0.8rem;
+            font-size: 0.85rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); align-items: center; gap: 0.3rem;
+            transition: all 0.25s ease;
+        }
+        .glossary-toggle-btn:hover { background: var(--fluor-cyan); }
 
         .main-wrapper { flex: 1; min-width: 0; width: 100%; }
 
         @media (max-width: 899px) {
             .app-body-container { flex-direction: column; }
-            .left-sidebar-glossary { width: 100%; position: static; max-height: none; }
-        }
+            .glossary-toggle-btn { display: flex; }
+            .left-sidebar-glossary {
+                position: fixed; left: -320px; top: 60px; width: 300px;
+                max-height: calc(100vh - 80px); z-index: 100;
+                transition: left 0.3s cubic-bezier(0.4, 0, 0.3, 1);
+            }
+            .left-sidebar-glossary.active { left: 0; }
 
         .tab-content { display: none; width: 100%; }
         .tab-content.active { display: block; }
@@ -381,6 +397,9 @@
 
     <!-- ESTRUCTURA PRINCIPAL CON GLOSARIO A MANO IZQUIERDA -->
     <div class="app-body-container">
+        <button class="glossary-toggle-btn" onclick="toggleGlossary()" id="glossaryToggleBtn">
+            📖 Glosario
+        </button>
 
         <!-- GLOSARIO PERMANENTE A MANO IZQUIERDA -->
         <aside class="left-sidebar-glossary">
@@ -1646,6 +1665,14 @@
         function addPopit() { popits.push(''); savePopits(); renderPopits(); }
         function updatePopit(index, text) { popits[index] = text; savePopits(); }
         function deletePopit(index) { popits.splice(index, 1); savePopits(); renderPopits(); }
+
+        // TOGGLE GLOSARIO LATERAL
+        function toggleGlossary() {
+            const sidebar = document.querySelector('.left-sidebar-glossary');
+            const btn = document.getElementById('glossaryToggleBtn');
+            sidebar.classList.toggle('active');
+            btn.classList.toggle('active');
+        }
 
         // CAMBIO DE SECCIÓN
         function switchSection(secId) {
